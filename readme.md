@@ -8,8 +8,10 @@ Link to GitHub repository:
 https://github.com/IdaHolmen/EntertainmentFinder
 
 Used for design inspiration:
-
 https://www.kinolibrary.com/
 https://www.imdb.com/
 https://www.digitaliafilmlibrary.com/films
 https://www.netflix.com/
+
+I used this link to add a favicon in the browser tab to make it look more professional:
+https://www.w3schools.com/html/html_favicon.asp

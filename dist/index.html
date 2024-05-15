@@ -3,9 +3,45 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Entertainment Finder</title>
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href="../src/assets/logo--mobile.svg"
+		/>
+
+		<link rel="stylesheet" href="../src/css/reset.css" />
+		<link rel="stylesheet" href="../src/css/fonts.css" />
+		<link rel="stylesheet" href="../src/css/style.css" />
 	</head>
 	<body>
+		<header class="header">
+			<img
+				src="../src/assets/logo--mobile.svg"
+				alt="A popcorn bucket on a pink background"
+				class="logo--mobile"
+			/>
+			<button class="sign-in-button">Sign in</button>
+		</header>
+
+		<main class="main-container">
+			<section class="drop-down-section">
+				<button class="drop-down-button">
+					Choose preferred genre
+					<img
+						src="../src/assets/vector.svg"
+						alt="Arrow that points down"
+						class="vector-image"
+					/>
+				</button>
+			</section>
+
+			<div class="genre-headline-container">
+				<span class="line"></span>
+				<span class="genre-headline">Action</span>
+				<span class="line"></span>
+			</div>
+		</main>
 		<script src="bundle.js"></script>
 	</body>
 </html>
