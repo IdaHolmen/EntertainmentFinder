@@ -56,6 +56,10 @@ body {
 	align-content: center;
 }
 
+.drop-down-button:hover {
+	background-color: #414141;
+}
+
 .vector-image {
 	display: flex;
 	width: 1rem;
@@ -84,4 +88,12 @@ body {
 	font-weight: 800;
 	font-size: 1.25rem;
 	padding: 1rem;
+}
+
+/* CONTENT CONTAINER STYLING */
+.content-container {
+	height: 18.75rem;
+	border: 2px solid white;
+	margin: 0 2rem;
+	overflow-x: scroll;
 }
