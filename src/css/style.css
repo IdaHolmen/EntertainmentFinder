@@ -39,7 +39,9 @@ body {
 .drop-down-section {
 	width: 100%;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	padding: 1rem;
 }
 
@@ -65,6 +67,38 @@ body {
 	width: 1rem;
 	height: 1rem;
 	margin: auto 0;
+}
+
+.vector-image--active {
+	transform: rotate(180deg);
+}
+
+.filter-button-container {
+	display: none;
+}
+
+.filter-button-container--active {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	background-color: #181818;
+	width: 100%;
+	height: auto;
+	border-radius: 5px;
+}
+
+.genre-button {
+	font-weight: 600;
+	color: white;
+	background-color: #181818;
+	margin: 1rem;
+	padding: 0.3rem 0.5rem;
+	border-radius: 5px;
+}
+
+.genre-button:hover {
+	background-color: #414141;
 }
 
 /* SECTION FOR ALL THE CONTENT */
