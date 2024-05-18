@@ -4,12 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	// SETTING GENRES
 	let genreMappings = {};
 
+	// MATCHING THE ID NUMBERS UP AGAINST THE GENRE NAMES
 	function storeGenreMappings(genreData) {
 		genreData.genres.forEach((genre) => {
 			genreMappings[genre.id] = genre.name;
 		});
 	}
 
+	// LIST OF ID'S AND GENRES
+	// USED THIS LINK TO FETCH THE GENRE LIST AND DECIDED TO HARDCODE IT RIGHT INTO THE DOCUMENT FOR EASIER ACCESS:
+	// https://developer.themoviedb.org/reference/genre-movie-list
 	storeGenreMappings({
 		genres: [
 			{id: 28, name: 'Action'},
@@ -34,7 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		],
 	});
 
+	// MAKING A VARIABLE NAMED GENRES AND SORTING IT ALPHABETICALLY
 	const genres = Object.values(genreMappings).sort();
+
+	// CREATING A MAPPING FROM GENRE TO CONTENT CONTAINER
+	const genreContentContainers = {};
 
 	genres.forEach((genre) => {
 		// CREATING GENRE HEADLINE ELEMENTS
@@ -56,21 +64,69 @@ document.addEventListener('DOMContentLoaded', () => {
 		genreHeadline.classList.add('genre-headline');
 		line2.classList.add('line');
 
-		// CREATING CONTENT CONTAINER ELEMENTS
+		// CREATING CONTENT CONTAINER ELEMENT FOR THE GENRES
 		const contentContainer = document.createElement('section');
-		const movieContainer = document.createElement('div');
-		const moviePoster = document.createElement('img');
-		const movieTitle = document.createElement('p');
-
-		// APPEND ELEMENTS
-		movieSection.append(contentContainer);
-		contentContainer.append(movieContainer);
-		movieContainer.append(moviePoster, movieTitle);
-
-		// ADD CLASSES
 		contentContainer.classList.add('content-container');
-		movieContainer.classList.add('movie-container');
-		moviePoster.classList.add('movie-poster');
-		movieTitle.classList.add('movie-title');
+		movieSection.append(contentContainer);
+
+		// STORE THE CONTENT CONTAINER IN THE MAPPING
+		genreContentContainers[genre] = contentContainer;
 	});
+
+	// FETCHING MOVIE LIST
+	const fetchMovies = async () => {
+		try {
+			const response = await fetch(
+				'https://api.themoviedb.org/3/discover/movie?api_key=MY_KEY'
+			);
+
+			const result = await response.json();
+			console.log(result.results);
+			renderMovies(result.results);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	fetchMovies();
+
+	function renderMovies(movies) {
+		movies.forEach((movie) => {
+			//MAKING SURE THAT THE MOVIES GET SORTED IN EVERY GENRE THEY HAVE IN THE genre_ids ARRAY
+			movie.genre_ids.forEach((genreId) => {
+				const genreName = genreMappings[genreId];
+				const genreContentContainer = genreContentContainers[genreName];
+
+				if (genreContentContainer) {
+					// CREATING CONTENT CONTAINER ELEMENTS
+					const movieContainer = document.createElement('div');
+					const posterSection = document.createElement('div');
+					const titleSection = document.createElement('div');
+					const moviePoster = document.createElement('img');
+					const movieTitle = document.createElement('p');
+
+					// SETTING IMAGE
+					moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+					moviePoster.alt = movie.title + ' Poster';
+
+					// SET CONTENT
+					movieTitle.textContent = movie.title;
+
+					// APPEND ELEMENTS
+					movieContainer.append(posterSection, titleSection);
+					posterSection.append(moviePoster);
+					titleSection.append(movieTitle);
+
+					// ADD CLASSES
+					movieContainer.classList.add('movie-container');
+					posterSection.classList.add('poster-section');
+					titleSection.classList.add('title-section');
+					moviePoster.classList.add('movie-poster');
+					movieTitle.classList.add('movie-title');
+
+					// APPEND MOVIE CONTAINER TO THE CORRECT GENRE CONTENT CONTAINER
+					genreContentContainer.append(movieContainer);
+				}
+			});
+		});
+	}
 });
