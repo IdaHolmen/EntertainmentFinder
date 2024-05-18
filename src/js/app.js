@@ -1,3 +1,5 @@
+import key from './key.js';
+
 document.addEventListener('DOMContentLoaded', () => {
 	const movieSection = document.querySelector('.movie-section');
 
@@ -77,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const fetchMovies = async () => {
 		try {
 			const response = await fetch(
-				'https://api.themoviedb.org/3/discover/movie?api_key=MY_KEY'
+				`https://api.themoviedb.org/3/discover/movie?api_key=${key}`
 			);
 
 			const result = await response.json();
