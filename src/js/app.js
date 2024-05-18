@@ -1,10 +1,11 @@
 import key from './key.js';
+import './filterGenres.js';
+
+// SETTING GENRES
+let genreMappings = {};
 
 document.addEventListener('DOMContentLoaded', () => {
 	const movieSection = document.querySelector('.movie-section');
-
-	// SETTING GENRES
-	let genreMappings = {};
 
 	// MATCHING THE ID NUMBERS UP AGAINST THE GENRE NAMES
 	function storeGenreMappings(genreData) {
@@ -132,3 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 });
+
+export {genreMappings};
