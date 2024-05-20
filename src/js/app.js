@@ -1,8 +1,9 @@
 import key from './key.js';
 import './filterGenres.js';
 
-// SETTING GENRES
+// SETTING GENRES AND ALL MOVIES SO THEY CAN BE EXPORTED
 let genreMappings = {};
+let allMovies = [];
 
 document.addEventListener('DOMContentLoaded', () => {
 	const movieSection = document.querySelector('.movie-section');
@@ -84,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			);
 
 			const result = await response.json();
-			console.log(result.results);
+			allMovies = result.results;
+			console.log(allMovies);
 			renderMovies(result.results);
 		} catch (error) {
 			console.error(error);
@@ -107,11 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
 					const moviePoster = document.createElement('img');
 					const movieTitle = document.createElement('p');
 
-					// SETTING IMAGE
+					// SETTING CONTENT
 					moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 					moviePoster.alt = movie.title + ' Poster';
-
-					// SET CONTENT
 					movieTitle.textContent = movie.title;
 
 					// APPEND ELEMENTS
@@ -134,4 +134,4 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 });
 
-export {genreMappings};
+export {genreMappings, allMovies};
