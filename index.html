@@ -27,7 +27,7 @@
 			<button class="sign-in-button">Sign in</button>
 		</header>
 
-		<main class="main-container">
+		<main class="main-container" hidden>
 			<section class="drop-down-section">
 				<button class="drop-down-button">
 					Choose preferred genre
@@ -44,6 +44,52 @@
 			</section>
 
 			<section class="movie-section"></section>
+		</main>
+
+		<main class="movie-info-container">
+			<header class="info-title-section">
+				<div class="info-title"></div>
+			</header>
+
+			<div class="slideshow">
+				<div class="slideshow-container"></div>
+				<a class="previous"
+					><img src="./src/assets/back-button.svg" alt="Previous image"
+				/></a>
+				<a class="next"
+					><img src="./src/assets/next-button.svg" alt="Next image"
+				/></a>
+				<div class="dots-container"></div>
+			</div>
+
+			<section class="rating-section">
+				<div class="vote-average-container">
+					<img src="" alt="" class="vote-image" />
+					<p class="vote-average"></p>
+				</div>
+
+				<div class="rating-thumbs-container">
+					<img src="" alt="" class="thumbs-up" />
+					<img src="" alt="" class="thumbs-down" />
+				</div>
+			</section>
+
+			<section class="overview"></section>
+
+			<section class="comment-section">
+				<label for="comment-input">Leave a comment about this movie:</label>
+				<textarea
+					name="comment-input"
+					class="comment-input"
+					cols="30"
+					rows="4"
+				></textarea>
+				<label class="char-count">Typed characters: 0</label>
+				<label for="task-description-input" class="description-error"
+					>Error</label
+				>
+				<button class="comment-submit-button">Submit</button>
+			</section>
 		</main>
 		<script src="./dist/bundle.js"></script>
 	</body>

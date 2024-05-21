@@ -1,5 +1,6 @@
 import key from './key.js';
 import './filterGenres.js';
+import './movieInfo.js';
 
 // SETTING GENRES AND ALL MOVIES SO THEY CAN BE EXPORTED
 let genreMappings = {};
@@ -75,13 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// STORE THE CONTENT CONTAINER IN THE MAPPING
 		genreContentContainers[genre] = contentContainer;
-
-		// if (contentContainer.length === 0) {
-		// 	const noContentMessage = document.createElement('p');
-		// 	noContentMessage.textContent = 'No content to show';
-		// 	noContentMessage.classList.add('no-content-message');
-		// 	contentContainer.append(noContentMessage);
-		// }
 	});
 
 	// FETCHING MOVIE LIST
@@ -110,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				if (genreContentContainer) {
 					// CREATING CONTENT CONTAINER ELEMENTS
-					const movieContainer = document.createElement('div');
+					const movieContainer = document.createElement('button');
 					const posterSection = document.createElement('div');
 					const titleSection = document.createElement('div');
 					const moviePoster = document.createElement('img');

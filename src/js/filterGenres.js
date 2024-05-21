@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				} else {
 					filteredMovies.forEach((movie) => {
 						// CREATING CONTENT CONTAINER ELEMENTS
-						const movieContainer = document.createElement('div');
+						const movieContainer = document.createElement('button');
 						const posterSection = document.createElement('div');
 						const titleSection = document.createElement('div');
 						const moviePoster = document.createElement('img');
