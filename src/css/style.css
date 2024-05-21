@@ -4,6 +4,7 @@ body {
 		Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	scrollbar-color: #181818 #acacac;
 	scroll-behavior: smooth;
+	color: white;
 }
 
 /* HEADER */
@@ -205,6 +206,11 @@ body {
 	color: white;
 }
 
+.movie-container:hover {
+	transform: scale(1.1);
+	transition: 0.1s;
+}
+
 .movie-container--filtered {
 	max-width: 9.375rem;
 	height: 20rem;
@@ -213,6 +219,11 @@ body {
 	flex-direction: column;
 	background-color: #181818;
 	color: white;
+}
+
+.movie-container--filtered:hover {
+	transform: scale(1.1);
+	transition: 0.1s;
 }
 
 .poster-section {
@@ -242,4 +253,105 @@ body {
 	margin: 2rem;
 	color: white;
 	text-align: center;
+}
+
+/* MOVIE INFO PAGE */
+.movie-info-container {
+	width: 100%;
+	height: 90vh;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.info-title-section {
+	flex-basis: 6%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid red;
+}
+
+.info-title {
+	color: white;
+	font-weight: 800;
+	font-size: 1.5rem;
+}
+
+.slideshow {
+	flex-basis: 33%;
+	width: 100%;
+	background-color: #181818;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	border: 2px solid blue;
+}
+
+.slideshow-container {
+	width: 90%;
+	height: 90%;
+	border: 2px solid white;
+}
+
+.previous,
+.next {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+	border-radius: 5px;
+	background-color: #d9d9d98d;
+}
+
+.previous {
+	left: 0;
+	margin-left: 5px;
+}
+
+.next {
+	right: 0;
+	margin-right: 5px;
+}
+
+.rating-section {
+	flex-basis: 6%;
+	width: 100%;
+	background-color: #181818;
+	border: 2px solid green;
+}
+
+.overview {
+	flex-basis: 30%;
+	width: 100%;
+	background-color: #181818;
+	border: 2px solid orange;
+}
+
+.comment-section {
+	flex-basis: 25%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid yellow;
+}
+
+.comment-input {
+	width: 90%;
+	height: 88px;
+}
+
+.comment-submit-button {
+	width: 80px;
+	height: 30px;
+	background-color: #f1bfe6;
+	color: black;
+	font-weight: 600;
+	border-radius: 5px;
 }
