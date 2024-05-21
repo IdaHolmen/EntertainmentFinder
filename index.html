@@ -4,23 +4,26 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Entertainment Finder</title>
-		<link
-			rel="icon"
-			type="image/x-icon"
-			href="../src/assets/logo--mobile.svg"
-		/>
+		<link rel="icon" type="image/x-icon" href="./src/assets/logo--mobile.svg" />
 
-		<link rel="stylesheet" href="../src/css/reset.css" />
-		<link rel="stylesheet" href="../src/css/fonts.css" />
-		<link rel="stylesheet" href="../src/css/style.css" />
+		<link rel="stylesheet" href="./src/css/reset.css" />
+		<link rel="stylesheet" href="./src/css/fonts.css" />
+		<link rel="stylesheet" href="./src/css/style.css" />
+		<link rel="stylesheet" href="./src/css/media-queries.css" />
 	</head>
 	<body>
 		<header class="header">
-			<img
-				src="../src/assets/logo--mobile.svg"
-				alt="A popcorn bucket on a pink background"
-				class="logo--mobile"
-			/>
+			<picture class="logo">
+				<source
+					srcset="./src/assets/logo--desktop.svg"
+					media="(min-width: 500px)"
+				/>
+				<img
+					src="./src/assets/logo--mobile.svg"
+					alt="A popcorn bucket on a pink background"
+					class="logo-image"
+				/>
+			</picture>
 			<button class="sign-in-button">Sign in</button>
 		</header>
 
@@ -29,7 +32,7 @@
 				<button class="drop-down-button">
 					Choose preferred genre
 					<img
-						src="../src/assets/vector.svg"
+						src="./src/assets/vector.svg"
 						alt="Arrow that points down"
 						class="vector-image"
 					/>
@@ -42,6 +45,6 @@
 
 			<section class="movie-section"></section>
 		</main>
-		<script src="bundle.js"></script>
+		<script src="./dist/bundle.js"></script>
 	</body>
 </html>
