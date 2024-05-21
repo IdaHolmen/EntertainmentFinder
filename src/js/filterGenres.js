@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				);
 
 				if (filteredMovies.length === 0) {
-					const noMoviesMessage = document.createElement('p');
-					noMoviesMessage.textContent = 'No movies found in this genre';
-					noMoviesMessage.classList.add('no-movies-message');
-					movieSection.appendChild(noMoviesMessage);
+					const noContentMessage = document.createElement('p');
+					noContentMessage.textContent = 'No movies found in this genre';
+					noContentMessage.classList.add('no-content-message');
+					movieSection.appendChild(noContentMessage);
 				} else {
 					filteredMovies.forEach((movie) => {
 						// CREATING CONTENT CONTAINER ELEMENTS

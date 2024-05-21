@@ -1,0 +1,47 @@
+@media screen and (min-width: 500px) {
+	.header {
+		height: 80px;
+	}
+
+	.logo img {
+		height: 50px;
+		max-width: 250px;
+	}
+
+	.sign-in-button {
+		font-size: 1.2rem;
+	}
+
+	.genre-button {
+		font-size: 1rem;
+		margin: 1rem;
+		padding: 0.3rem 0.5rem;
+	}
+
+	.clear-filters-button {
+		font-size: 1rem;
+	}
+
+	.content-container {
+		min-height: 384px;
+	}
+
+	.movie-container {
+		max-width: 180px;
+		height: 350px;
+	}
+
+	.poster-section {
+		width: 180px;
+		height: 250px;
+	}
+
+	.title-section {
+		height: 110px;
+	}
+
+	.movie-title {
+		font-size: 1rem;
+		padding: 0.5rem;
+	}
+}

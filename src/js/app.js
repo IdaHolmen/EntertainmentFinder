@@ -75,6 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// STORE THE CONTENT CONTAINER IN THE MAPPING
 		genreContentContainers[genre] = contentContainer;
+
+		// if (contentContainer.length === 0) {
+		// 	const noContentMessage = document.createElement('p');
+		// 	noContentMessage.textContent = 'No content to show';
+		// 	noContentMessage.classList.add('no-content-message');
+		// 	contentContainer.append(noContentMessage);
+		// }
 	});
 
 	// FETCHING MOVIE LIST
@@ -113,6 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
 					moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 					moviePoster.alt = movie.title + ' Poster';
 					movieTitle.textContent = movie.title;
+
+					// SHORTENS TITLE IF IT'S TOO LONG
+					const maxLength = 30;
+					const shortenedTitle =
+						movie.title.length > maxLength
+							? movie.title.substring(0, maxLength) + '...'
+							: movie.title;
+					movieTitle.textContent = shortenedTitle;
 
 					// APPEND ELEMENTS
 					movieContainer.append(posterSection, titleSection);
