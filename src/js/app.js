@@ -1,6 +1,6 @@
 import key from './key.js';
 import './filterGenres.js';
-import './movieInfo.js';
+import {fetchImages, renderMovieInfo} from './movieInfo.js';
 
 // SETTING GENRES AND ALL MOVIES SO THEY CAN BE EXPORTED
 let genreMappings = {};
@@ -8,6 +8,8 @@ let allMovies = [];
 
 document.addEventListener('DOMContentLoaded', () => {
 	const movieSection = document.querySelector('.movie-section');
+	const mainContainer = document.querySelector('.main-container');
+	const movieInfoContainer = document.querySelector('.movie-info-container');
 
 	// MATCHING THE ID NUMBERS UP AGAINST THE GENRE NAMES
 	function storeGenreMappings(genreData) {
@@ -137,6 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					// APPEND MOVIE CONTAINER TO THE CORRECT GENRE CONTENT CONTAINER
 					genreContentContainer.append(movieContainer);
+
+					// ADD EVENT LISTENER TO MOVIE CONTAINER
+					movieContainer.addEventListener('click', () => {
+						mainContainer.hidden = true;
+						movieInfoContainer.hidden = false;
+						renderMovieInfo([movie]);
+					});
 				}
 			});
 		});
