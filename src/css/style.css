@@ -27,6 +27,7 @@ body {
 .sign-in-button {
 	color: #acacac;
 	font-weight: 800;
+	font-size: 1.2rem;
 	margin: 0 2rem;
 }
 
@@ -36,6 +37,36 @@ body {
 
 .sign-in-button:active {
 	color: #f1bfe6;
+}
+
+.back-to-main-button {
+	width: 5rem;
+	height: 2rem;
+	background-color: #181818;
+	color: white;
+	font-weight: 800;
+	font-size: 1.2rem;
+	border-radius: 5px;
+	display: none;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-content: center;
+}
+
+.back-to-main-button:hover {
+	background-color: #414141;
+}
+
+.back-to-main-button:active {
+	background-color: #acacac;
+}
+
+.back-to-main-image {
+	display: flex;
+	width: 1rem;
+	height: 1rem;
+	margin: auto 0;
+	transform: rotate(90deg);
 }
 
 /* DROP DOWN SECTION */
@@ -259,9 +290,9 @@ body {
 .movie-info-container {
 	width: 100%;
 	height: 90vh;
-	display: hidden;
+	display: none;
 	flex-direction: column;
-	overflow: hidden;
+	overflow: auto;
 }
 
 .info-title-section {
@@ -270,6 +301,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: 0.5rem 0;
 }
 
 .info-title {
@@ -279,8 +311,9 @@ body {
 }
 
 .slideshow {
-	flex-basis: 33%;
+	flex-basis: 30%;
 	width: 100%;
+	padding: 0 2rem;
 	background-color: #181818;
 	display: flex;
 	justify-content: center;
@@ -289,8 +322,11 @@ body {
 }
 
 .slideshow-container {
-	width: 90%;
-	height: 90%;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .previous,
@@ -317,13 +353,53 @@ body {
 
 .previous:hover,
 .next:hover {
-	background-color: #d9d9d9;
+	background-color: #e2dcdcd3;
 }
 
 .rating-section {
 	flex-basis: 6%;
 	width: 100%;
 	background-color: #181818;
+	display: flex;
+	flex-direction: row;
+	padding: 0.5rem 0;
+}
+
+.vote-average-container {
+	width: 50%;
+	margin-left: 2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.vote-image {
+	display: flex;
+	width: 1.5rem;
+	height: 1.5rem;
+	margin-right: 1rem;
+}
+
+.vote-average {
+	font-weight: 600;
+	font-size: 1.5rem;
+}
+
+.rating-thumbs-container {
+	width: 50%;
+	margin-right: 2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.thumbs-up,
+.thumbs-down {
+	width: 2rem;
+	height: 2rem;
+	margin: 0 0.5rem;
 }
 
 .overview {
@@ -334,16 +410,18 @@ body {
 }
 
 .comment-section {
-	flex-basis: 25%;
+	flex-basis: 28%;
 	width: 100%;
+	padding: 0 2rem;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
+	margin: 0.5rem 0;
 }
 
 .comment-input {
-	width: 90%;
+	width: 100%;
 	height: 88px;
 }
 
@@ -358,8 +436,7 @@ body {
 
 .dots-container {
 	position: absolute;
-	bottom: 0;
-	left: 45%;
+	bottom: 8px;
 }
 
 .dot {

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const movieSection = document.querySelector('.movie-section');
 	const mainContainer = document.querySelector('.main-container');
 	const movieInfoContainer = document.querySelector('.movie-info-container');
+	const backButton = document.querySelector('.back-to-main-button');
 
 	// MATCHING THE ID NUMBERS UP AGAINST THE GENRE NAMES
 	function storeGenreMappings(genreData) {
@@ -149,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								mainContainer.hidden = true;
 								movieInfoContainer.hidden = false;
 								movieInfoContainer.style.display = 'flex';
+								backButton.style.display = 'flex';
 								renderMovieInfo([selectedMovie]);
 							};
 						})()
@@ -157,6 +159,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	}
+
+	// ADD EVENT LISTENER TO BACK BUTTON
+	backButton.addEventListener('click', () => {
+		mainContainer.hidden = false;
+		movieInfoContainer.hidden = true;
+		movieInfoContainer.style.display = 'none';
+		backButton.style.display = 'none';
+	});
 });
 
 export {genreMappings, allMovies};

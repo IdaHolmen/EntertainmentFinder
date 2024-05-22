@@ -1,4 +1,5 @@
 import key from './key.js';
+
 // GLOBAL VARIABLES FOR SLIDESHOW
 let currentSlide = 0;
 let slides = [];
@@ -83,8 +84,12 @@ function renderImages(backdrops) {
 		dotsContainer.appendChild(dot);
 	});
 
+	// UPDATING GLOBAL VARIABLES
 	slides = document.querySelectorAll('.slide');
 	dots = document.querySelectorAll('.dot');
+
+	// RESETTING SLIDE INDEX
+	currentSlide = 0;
 
 	showSlide(currentSlide);
 }
@@ -99,13 +104,11 @@ const showSlide = (index) => {
 };
 
 const nextSlide = () => {
-	console.log('Next');
 	currentSlide = (currentSlide + 1) % slides.length;
 	showSlide(currentSlide);
 };
 
 const previousSlide = () => {
-	console.log('Previous');
 	currentSlide = (currentSlide - 1 + slides.length) % slides.length;
 	showSlide(currentSlide);
 };
@@ -136,11 +139,3 @@ function renderMovieInfo(movies) {
 }
 
 export {fetchImages, renderMovieInfo};
-
-// CREATING A BUTTON TO GO BACK TO MAIN PAGE
-// const header = document.querySelector('.header');
-
-// const backButton = document.createElement('button');
-// backButton.classList.add('back-button');
-// backButton.textContent = 'Back to Main Page';
-// header.append(backButton);
