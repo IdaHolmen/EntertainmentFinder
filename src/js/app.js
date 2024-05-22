@@ -141,11 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
 					genreContentContainer.append(movieContainer);
 
 					// ADD EVENT LISTENER TO MOVIE CONTAINER
-					movieContainer.addEventListener('click', () => {
-						mainContainer.hidden = true;
-						movieInfoContainer.hidden = false;
-						renderMovieInfo([movie]);
-					});
+					movieContainer.addEventListener(
+						'click',
+						(() => {
+							const selectedMovie = movie;
+							return () => {
+								mainContainer.hidden = true;
+								movieInfoContainer.hidden = false;
+								movieInfoContainer.style.display = 'flex';
+								renderMovieInfo([selectedMovie]);
+							};
+						})()
+					);
 				}
 			});
 		});

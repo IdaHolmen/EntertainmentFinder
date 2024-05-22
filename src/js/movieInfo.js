@@ -62,7 +62,8 @@ function renderImages(backdrops) {
 		return;
 	}
 
-	backdrops.forEach((backdrop, index) => {
+	// I WANT TO LIMIT THE NUMBER OF IMAGES TO 6
+	backdrops.slice(0, 6).forEach((backdrop, index) => {
 		const img = document.createElement('img');
 		img.src = `https://image.tmdb.org/t/p/original${backdrop.file_path}`;
 		img.alt = 'Movie Image';
@@ -130,10 +131,11 @@ function renderMovieInfo(movies) {
 		overview.textContent = movie.overview;
 		voteAverage.textContent = movie.vote_average;
 
-		console.log('Fetching images for movie ID:', movie.id);
 		fetchImages(movie.id);
 	});
 }
+
+export {fetchImages, renderMovieInfo};
 
 // CREATING A BUTTON TO GO BACK TO MAIN PAGE
 // const header = document.querySelector('.header');
