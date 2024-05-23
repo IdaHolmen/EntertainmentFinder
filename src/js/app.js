@@ -1,6 +1,5 @@
-import key from './key.js';
 import './filterGenres.js';
-import {fetchImages, renderMovieInfo} from './movieInfo.js';
+import {renderImages, renderMovieInfo} from './movieInfo.js';
 
 // SETTING GENRES AND ALL MOVIES SO THEY CAN BE EXPORTED
 let genreMappings = {};
@@ -81,22 +80,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		genreContentContainers[genre] = contentContainer;
 	});
 
-	// FETCHING MOVIE LIST
-	const fetchMovies = async () => {
+	const fetchAndRender = async () => {
 		try {
-			const response = await fetch(
-				`https://api.themoviedb.org/3/discover/movie?api_key=${key}`
-			);
-
-			const result = await response.json();
-			allMovies = result.results;
-			console.log(allMovies);
-			renderMovies(result.results);
+			const response = await fetch('http://localhost:3000/');
+			const movies = await response.json();
+			renderMovies(movies);
+			allMovies = [...movies];
 		} catch (error) {
-			console.error(error);
+			console.log(error);
 		}
 	};
-	fetchMovies();
+	fetchAndRender();
 
 	function renderMovies(movies) {
 		movies.forEach((movie) => {
@@ -169,4 +163,4 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 });
 
-export {genreMappings, allMovies};
+export {genreMappings, allMovies, renderMovies};

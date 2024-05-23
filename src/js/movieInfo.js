@@ -1,45 +1,43 @@
-import key from './key.js';
+import {renderMovies} from './app.js';
 
 // GLOBAL VARIABLES FOR SLIDESHOW
 let currentSlide = 0;
 let slides = [];
 let dots = [];
+let movieId = '';
 
-// FETCHING MOVIE LIST
-const fetchMovies = async () => {
+const setMovieId = (id) => {
+	movieId = id;
+};
+
+const fetchAndRenderInfo = async () => {
 	try {
-		const response = await fetch(
-			`https://api.themoviedb.org/3/discover/movie?api_key=${key}`
-		);
-
-		const result = await response.json();
-		console.log(result.results);
-		renderMovieInfo(result.results);
+		const response = await fetch('http://localhost:3000/');
+		const movies = await response.json();
+		console.log('Fetched movies:', movies);
+		renderMovies(movies);
 	} catch (error) {
-		console.error(error);
+		console.log(error);
 	}
 };
-fetchMovies();
+fetchAndRenderInfo();
 
-// FETCHING IMAGES TO MATCH THE MOVIES
-const fetchImages = async (movieId) => {
+document.addEventListener('DOMContentLoaded', fetchAndRenderInfo);
+
+const fetchAndRenderImages = async (movieId) => {
 	if (!movieId) {
 		console.error('Invalid movieId:', movieId);
 		return;
 	}
 	try {
-		const response = await fetch(
-			`https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${key}`
-		);
-
+		const response = await fetch(`http://localhost:3500/images/${movieId}`);
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
-
-		const result = await response.json();
-		renderImages(result.backdrops || []);
+		const images = await response.json();
+		renderImages(images || []);
 	} catch (error) {
-		console.error(error);
+		console.log(error);
 	}
 };
 
@@ -124,6 +122,8 @@ function renderMovieInfo(movies) {
 		return;
 	}
 
+	console.log('Rendering movie info for movies:', movies);
+
 	movies.forEach((movie) => {
 		const title = document.querySelector('.info-title');
 		const voteAverage = document.querySelector('.vote-average');
@@ -134,8 +134,9 @@ function renderMovieInfo(movies) {
 		overview.textContent = movie.overview;
 		voteAverage.textContent = movie.vote_average;
 
-		fetchImages(movie.id);
+		setMovieId(movie.id);
+		fetchAndRenderImages(movie.id);
 	});
 }
 
-export {fetchImages, renderMovieInfo};
+export {renderImages, renderMovieInfo, setMovieId, movieId};
