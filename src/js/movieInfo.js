@@ -1,5 +1,3 @@
-import {renderMovies} from './app.js';
-
 // GLOBAL VARIABLES FOR SLIDESHOW
 let currentSlide = 0;
 let slides = [];
@@ -14,13 +12,11 @@ const fetchAndRenderInfo = async () => {
 	try {
 		const response = await fetch('http://localhost:3000/');
 		const movies = await response.json();
-		console.log('Fetched movies:', movies);
-		renderMovies(movies);
+		renderMovieInfo(movies);
 	} catch (error) {
 		console.log(error);
 	}
 };
-fetchAndRenderInfo();
 
 document.addEventListener('DOMContentLoaded', fetchAndRenderInfo);
 
@@ -121,8 +117,6 @@ function renderMovieInfo(movies) {
 		console.error('Invalid movies array:', movies);
 		return;
 	}
-
-	console.log('Rendering movie info for movies:', movies);
 
 	movies.forEach((movie) => {
 		const title = document.querySelector('.info-title');

@@ -163,4 +163,4 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 });
 
-export {genreMappings, allMovies, renderMovies};
+export {genreMappings, allMovies};
