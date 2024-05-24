@@ -178,6 +178,10 @@ body {
 }
 
 /* SECTION FOR ALL THE CONTENT */
+.main-container {
+	display: none;
+}
+
 .movie-section {
 	width: 100%;
 	height: 100vh;
@@ -455,4 +459,18 @@ body {
 
 .active {
 	background-color: white;
+}
+
+/* SIGN UP SECTION */
+.sign-in-container {
+	width: 100%;
+	height: 90vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.legend-container {
+	width: 400px;
+	height: 200px;
 }
