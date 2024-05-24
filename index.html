@@ -112,28 +112,36 @@
 		</main>
 
 		<main class="sign-in-container">
-			<fieldset class="form">
-				<legend class="sign-in-form">Sign in</legend>
-				<div class="input-section">
-					<label for="email">E-mail<sup>*</sup></label>
-					<input type="email" name="email" class="email" />
-					<p class="email-error">Error</p>
+			<header class="exit-button-container">
+				<button class="exit-button">
+					<img src="./src/assets/exit.svg" alt="Exit button" />
+				</button>
+			</header>
 
-					<label for="password">Password<sup>*</sup></label>
-					<input type="password" name="password" class="password" />
-					<p class="password-error">Error</p>
-				</div>
+			<div class="form-container">
+				<fieldset class="form">
+					<legend class="sign-in-form">Sign in</legend>
+					<div class="input-section">
+						<label for="email">E-mail<sup>*</sup></label>
+						<input type="email" name="email" class="email" />
+						<p class="email-error">Error</p>
 
-				<div class="button-section">
-					<button class="sign-in-button">Sign in</button>
+						<label for="password">Password<sup>*</sup></label>
+						<input type="password" name="password" class="password" />
+						<p class="password-error">Error</p>
+					</div>
 
-					<p>
-						Don't have an account? Create one
-						<button class="sign-up-form__open">here</button>
-					</p>
-					<p class="submission-error">Error</p>
-				</div>
-			</fieldset>
+					<div class="button-section">
+						<button class="sign-in-button">Sign in</button>
+
+						<p>
+							Don't have an account? Create one
+							<button class="sign-up-form__open">here</button>
+						</p>
+						<p class="submission-error">Error</p>
+					</div>
+				</fieldset>
+			</div>
 		</main>
 		<script src="./dist/bundle.js"></script>
 	</body>
