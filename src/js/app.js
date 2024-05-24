@@ -2,7 +2,13 @@ import "./filterGenres.js";
 import {renderImages, renderMovieInfo} from "./movieInfo.js";
 import {validateSignInForm} from "./signInValidation.js";
 
-// SELECTING THE SIGN IN FORM ELEMENTS
+// SELECTING THE MAIN PAGE ELEMENTS
+const mainContainer = document.querySelector(".main-container");
+const movieSection = document.querySelector(".movie-section");
+const movieInfoContainer = document.querySelector(".movie-info-container");
+const backButton = document.querySelector(".back-to-main-button");
+
+// SELECTING THE SIGN IN ELEMENTS
 const emailInput = document.querySelector(".email");
 const passwordInput = document.querySelector(".password");
 const signInButton = document.querySelector(".sign-in-button");
@@ -10,16 +16,50 @@ const emailError = document.querySelector(".email-error");
 const passwordError = document.querySelector(".password-error");
 const signInForm = document.querySelector(".sign-in-form");
 const submissionError = document.querySelector(".submission-error");
+const signInFormContainer = document.querySelector(".sign-in-form-container");
+const openSignInFormButton = document.querySelector(".sign-in-button__open");
+const closeSignInFormButton = document.querySelector(".sign-in-form__close");
 
-console.log(signInButton);
+// SELECTING THE SIGN UP ELEMENTS
+const signUpFirstName = document.querySelector(".firstname");
+const signUpLastName = document.querySelector(".lastname");
+const signUpEmail = document.querySelector(".sign-up-email");
+const signUpPassword = document.querySelector(".sign-up-password");
+const signUpError = document.querySelector(".sign-up-error");
+const signUpForm = document.querySelector(".sign-up-form");
+const closeSignUpFormButton = document.querySelector(".sign-up-form__close");
+const openSignUpFormButton = document.querySelector(".sign-up-form__open");
+const signUpFormContainer = document.querySelector(".sign-up-form-container");
+
+openSignInFormButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	mainContainer.style.display = "none";
+	signInFormContainer.style.display = "flex";
+});
+
+closeSignInFormButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	signInFormContainer.style.display = "none";
+	signUpFormContainer.style.display = "none";
+	mainContainer.style.display = "flex";
+});
+
+openSignUpFormButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	signUpFormContainer.style.display = "flex";
+	signInFormContainer.style.display = "none";
+});
+
+closeSignUpFormButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	signUpFormContainer.style.display = "none";
+	signInFormContainer.style.display = "none";
+	mainContainer.style.display = "flex";
+});
+
 // SETTING GENRES AND ALL MOVIES SO THEY CAN BE EXPORTED
 let genreMappings = {};
 let allMovies = [];
-
-const movieSection = document.querySelector(".movie-section");
-const mainContainer = document.querySelector(".main-container");
-const movieInfoContainer = document.querySelector(".movie-info-container");
-const backButton = document.querySelector(".back-to-main-button");
 
 // MATCHING THE ID NUMBERS UP AGAINST THE GENRE NAMES
 function storeGenreMappings(genreData) {
@@ -172,6 +212,7 @@ backButton.addEventListener("click", () => {
 	backButton.style.display = "none";
 });
 
+// ADD EVENT LISTENER TO SIGN UP FORM
 signInForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 	validateSignInForm(
@@ -181,5 +222,7 @@ signInForm.addEventListener("submit", (e) => {
 		passwordError
 	);
 });
+
+// ADD EVENT LISTENER TO
 
 export {genreMappings, allMovies};

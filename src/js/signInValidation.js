@@ -9,7 +9,7 @@ const validateSignInForm = (
 		emailError: "",
 		passwordError: "",
 	};
-	console.log(errors);
+
 	if (!email && !password) {
 		(errors.errorStatus = true), (errors.emailError = "E-mail is required ⚠️");
 		errors.passwordError = "Password is required ⚠️";
@@ -54,7 +54,6 @@ const validateSignInForm = (
 	const signInFormStatus = () => {
 		return errors.errorStatus;
 	};
-	console.log(errors);
 	return signInFormStatus;
 };
 

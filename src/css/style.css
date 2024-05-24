@@ -508,7 +508,7 @@ body {
 	font-weight: 800;
 }
 
-.sign-in__close img {
+.sign-in-form__close img {
 	height: 20px;
 	width: 20px;
 }
@@ -523,7 +523,7 @@ body {
 .email-error,
 .password-error,
 .submission-error {
-	/* visibility: hidden; */
+	visibility: hidden;
 	color: white;
 	width: 20rem;
 }
@@ -563,18 +563,19 @@ body {
 	padding: 0 2rem;
 }
 
-.exit-button-sign-up {
+.sign-up-header {
 	flex-basis: 10%;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center;
 }
 
-.sign-up__close {
-	display: contents;
+.sign-up-headline {
+	font-size: 1.5rem;
+	font-weight: 800;
 }
 
-.sign-up__close img {
+.sign-up-form__close img {
 	height: 20px;
 	width: 20px;
 }
