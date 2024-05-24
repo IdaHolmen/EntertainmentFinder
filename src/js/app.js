@@ -1,6 +1,7 @@
 import "./filterGenres.js";
 import {renderImages, renderMovieInfo} from "./movieInfo.js";
 import {validateSignInForm} from "./signInValidation.js";
+import {validateSignUpForm} from "./signUpValidation.js";
 
 // SELECTING THE MAIN PAGE ELEMENTS
 const mainContainer = document.querySelector(".main-container");
@@ -30,13 +31,16 @@ const signUpForm = document.querySelector(".sign-up-form");
 const closeSignUpFormButton = document.querySelector(".sign-up-form__close");
 const openSignUpFormButton = document.querySelector(".sign-up-form__open");
 const signUpFormContainer = document.querySelector(".sign-up-form-container");
+const signUpButton = document.querySelector(".sign-up-button");
 
+// OPEN SIGN IN MODAL
 openSignInFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	mainContainer.style.display = "none";
 	signInFormContainer.style.display = "flex";
 });
 
+// CLOSE SIGN IN MODAL
 closeSignInFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	signInFormContainer.style.display = "none";
@@ -44,12 +48,14 @@ closeSignInFormButton.addEventListener("click", (e) => {
 	mainContainer.style.display = "flex";
 });
 
+// OPEN SIGN UP MODAL
 openSignUpFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	signUpFormContainer.style.display = "flex";
 	signInFormContainer.style.display = "none";
 });
 
+// CLOSE SIGN UP MODAL
 closeSignUpFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	signUpFormContainer.style.display = "none";
@@ -212,7 +218,7 @@ backButton.addEventListener("click", () => {
 	backButton.style.display = "none";
 });
 
-// ADD EVENT LISTENER TO SIGN UP FORM
+// ADD EVENT LISTENER TO SIGN IN FORM
 signInForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 	validateSignInForm(
@@ -223,6 +229,16 @@ signInForm.addEventListener("submit", (e) => {
 	);
 });
 
-// ADD EVENT LISTENER TO
+// ADD EVENT LISTENER TO SIGN UP FORM
+signUpButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	validateSignUpForm(
+		signUpFirstName.value,
+		signUpLastName.value,
+		signUpEmail.value,
+		signUpPassword.value,
+		signUpError
+	);
+});
 
 export {genreMappings, allMovies};
