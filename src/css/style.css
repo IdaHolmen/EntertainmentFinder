@@ -465,18 +465,17 @@ body {
 	background-color: white;
 }
 
-/* SIGN UP SECTION */
-.sign-in-container {
-	width: 100%;
+/* SIGN IN SECTION */
+.forms {
 	height: 90vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	padding: 0 2rem;
 }
 
 .exit-button-container {
 	flex-basis: 10%;
+	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -492,7 +491,15 @@ body {
 }
 
 .form-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.form-element-container {
 	flex-basis: 90%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 }
@@ -501,12 +508,11 @@ body {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: 50%;
+	height: 60%;
 	border-radius: 5px;
 }
 
 .sign-in-form {
-	display: flex;
 	text-align: center;
 	font-weight: 800;
 	font-size: 1.5rem;
@@ -520,11 +526,19 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	margin: 0 auto;
+	gap: 0.5rem;
 }
 
 .email,
 .password {
+	height: 2rem;
 	padding-left: 0.3rem;
+}
+
+.email-error,
+.password-error,
+.submission-error {
+	visibility: hidden;
 }
 
 .button-section {
@@ -551,5 +565,72 @@ body {
 }
 
 .sign-in-button:hover {
+	background-color: #ffe4f9;
+}
+
+/* CREATE ACCOUNT SECTION */
+.sign-up-form-container {
+	height: 90vh;
+	display: none;
+	flex-direction: column;
+	padding: 0 2rem;
+}
+
+.exit-button-sign-up {
+	flex-basis: 10%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.sign-up-form {
+	flex-basis: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-elements {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.input-section {
+	width: 90%;
+	flex-basis: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.sign-up-form input {
+	width: 20rem;
+	height: 2rem;
+	padding-left: 0.3rem;
+}
+
+.sign-up-error {
+	visibility: hidden;
+}
+
+.sign-up-button-container {
+	flex-basis: 10%;
+	display: flex;
+	justify-content: center;
+}
+
+.sign-up-button {
+	width: 80px;
+	height: 30px;
+	background-color: #f1bfe6;
+	color: black;
+	font-weight: 600;
+	font-size: 1rem;
+	border-radius: 5px;
+}
+
+.sign-up-button:hover {
 	background-color: #ffe4f9;
 }

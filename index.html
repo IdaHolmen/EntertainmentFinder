@@ -34,6 +34,7 @@
 			<button class="sign-in-button__open">Sign in</button>
 		</header>
 
+		<!------------------------------------------------ MAIN PAGE  --------------------------------------------------------->
 		<main class="main-container">
 			<section class="drop-down-section">
 				<button class="drop-down-button">
@@ -52,7 +53,7 @@
 
 			<section class="movie-section"></section>
 		</main>
-
+		<!--------------------------------------------- MOVIE INFO PAGE  ------------------------------------------------------>
 		<main class="movie-info-container">
 			<header class="info-title-section">
 				<div class="info-title"></div>
@@ -110,37 +111,73 @@
 				<button class="comment-submit-button">Submit</button>
 			</section>
 		</main>
-
-		<main class="sign-in-container">
-			<header class="exit-button-container">
-				<button class="exit-button">
-					<img src="./src/assets/exit.svg" alt="Exit button" />
-				</button>
-			</header>
-
+		<!------------------------------------------------ FORMS  --------------------------------------------------------->
+		<main class="forms">
 			<div class="form-container">
-				<fieldset class="form">
-					<legend class="sign-in-form">Sign in</legend>
-					<div class="input-section">
-						<label for="email">E-mail<sup>*</sup></label>
-						<input type="email" name="email" class="email" />
-						<p class="email-error">Error</p>
+				<div class="exit-button-container">
+					<button class="exit-button">
+						<img src="./src/assets/exit.svg" alt="Exit button" />
+					</button>
+				</div>
 
-						<label for="password">Password<sup>*</sup></label>
-						<input type="password" name="password" class="password" />
-						<p class="password-error">Error</p>
+				<div class="form-element-container">
+					<fieldset class="form">
+						<legend class="sign-in-form">Sign in</legend>
+						<div class="input-section">
+							<label for="email">E-mail<sup>*</sup></label>
+							<input type="email" name="email" class="email" />
+							<p class="email-error">Error</p>
+
+							<label for="password">Password<sup>*</sup></label>
+							<input type="password" name="password" class="password" />
+							<p class="password-error">Error</p>
+						</div>
+
+						<div class="button-section">
+							<button class="sign-in-button">Sign in</button>
+
+							<p>
+								Don't have an account? Create one
+								<button class="sign-up-form__open">here</button>
+							</p>
+							<p class="submission-error">Error</p>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+
+			<div class="sign-up-form-container">
+				<div class="exit-button-sign-up">
+					<button class="exit-button">
+						<img src="./src/assets/exit.svg" alt="Exit button" />
+					</button>
+				</div>
+
+				<form class="sign-up-form">
+					<div class="form-elements">
+						<label for="firstname">Firstname: <sup>*</sup></label>
+						<input type="text" name="firstname" class="firstname" />
+
+						<label for="lastname">Lastname: <sup>*</sup></label>
+						<input type="text" name="lastname" class="lastname" />
+
+						<label for="sign-up-email">E-mail: <sup>*</sup></label>
+						<input type="email" name="sign-up-email" class="sign-up-email" />
+
+						<label for="sign-up-password">Password: <sup>*</sup></label>
+						<input
+							type="password"
+							name="sign-up-password"
+							class="sign-up-password"
+						/>
+
+						<p class="sign-up-error">Error</p>
 					</div>
+				</form>
 
-					<div class="button-section">
-						<button class="sign-in-button">Sign in</button>
-
-						<p>
-							Don't have an account? Create one
-							<button class="sign-up-form__open">here</button>
-						</p>
-						<p class="submission-error">Error</p>
-					</div>
-				</fieldset>
+				<div class="sign-up-button-container">
+					<button class="sign-up-button">Sign up!</button>
+				</div>
 			</div>
 		</main>
 		<script src="./dist/bundle.js"></script>
