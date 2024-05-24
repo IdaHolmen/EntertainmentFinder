@@ -24,18 +24,18 @@ body {
 	margin: 0 2rem;
 }
 
-.sign-in-button {
+.sign-in-button__open {
 	color: #acacac;
 	font-weight: 800;
 	font-size: 1.2rem;
 	margin: 0 2rem;
 }
 
-.sign-in-button:hover {
+.sign-in-button__open:hover {
 	color: white;
 }
 
-.sign-in-button:active {
+.sign-in-button__open:active {
 	color: #f1bfe6;
 }
 
@@ -442,6 +442,10 @@ body {
 	border-radius: 5px;
 }
 
+.comment-submit-button:hover {
+	background-color: #ffe4f9;
+}
+
 .dots-container {
 	position: absolute;
 	bottom: 8px;
@@ -466,11 +470,64 @@ body {
 	width: 100%;
 	height: 90vh;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	padding: 0 2rem;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 50%;
+	border-radius: 5px;
+}
+
+.sign-in-form {
+	display: flex;
+	text-align: center;
+	font-weight: 800;
+	font-size: 1.5rem;
+	padding: 0 1rem;
+}
+
+.input-section {
+	width: 90%;
+	flex-basis: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.email,
+.password {
+	padding-left: 0.3rem;
+}
+
+.button-section {
+	flex-basis: 40%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 	align-items: center;
 }
 
-.legend-container {
-	width: 400px;
-	height: 200px;
+.sign-up-form__open {
+	color: white;
+	font-weight: 800;
+}
+
+.sign-in-button {
+	width: 80px;
+	height: 30px;
+	background-color: #f1bfe6;
+	color: black;
+	font-weight: 600;
+	font-size: 1rem;
+	border-radius: 5px;
+}
+
+.sign-in-button:hover {
+	background-color: #ffe4f9;
 }

@@ -31,7 +31,7 @@
 					class="back-to-main-image"
 				/>Back
 			</button>
-			<button class="sign-in-button">Sign in</button>
+			<button class="sign-in-button__open">Sign in</button>
 		</header>
 
 		<main class="main-container">
@@ -112,8 +112,27 @@
 		</main>
 
 		<main class="sign-in-container">
-			<fieldset>
-				<legend class="legend-container">Sign in</legend>
+			<fieldset class="form">
+				<legend class="sign-in-form">Sign in</legend>
+				<div class="input-section">
+					<label for="email">E-mail<sup>*</sup></label>
+					<input type="email" name="email" class="email" />
+					<p class="email-error">Error</p>
+
+					<label for="password">Password<sup>*</sup></label>
+					<input type="password" name="password" class="password" />
+					<p class="password-error">Error</p>
+				</div>
+
+				<div class="button-section">
+					<button class="sign-in-button">Sign in</button>
+
+					<p>
+						Don't have an account? Create one
+						<button class="sign-up-form__open">here</button>
+					</p>
+					<p class="submission-error">Error</p>
+				</div>
 			</fieldset>
 		</main>
 		<script src="./dist/bundle.js"></script>
