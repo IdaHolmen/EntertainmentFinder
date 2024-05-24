@@ -114,36 +114,31 @@
 		<!------------------------------------------------ SIGN IN  --------------------------------------------------------->
 		<main class="forms">
 			<div class="sign-in-form-container">
-				<div class="exit-button-container">
+				<div class="sign-in-header">
+					<div class="spacing-element"></div>
+					<div class="sign-in-headline">Sign in</div>
 					<button class="sign-in__close">
 						<img src="./src/assets/exit.svg" alt="Exit button" />
 					</button>
 				</div>
 
-				<div class="form-element-container">
-					<fieldset class="form">
-						<legend class="sign-in-form">Sign in</legend>
-						<div class="input-section">
-							<label for="email">E-mail<sup>*</sup></label>
-							<input type="email" name="email" class="email" />
-							<p class="email-error">Error</p>
+				<form class="sign-in-form">
+					<label for="email">E-mail<sup>*</sup></label>
+					<input type="email" name="email" class="email" />
+					<p class="email-error">Error</p>
 
-							<label for="password">Password<sup>*</sup></label>
-							<input type="password" name="password" class="password" />
-							<p class="password-error">Error</p>
-						</div>
+					<label for="password">Password<sup>*</sup></label>
+					<input type="password" name="password" class="password" />
+					<p class="password-error">Error</p>
 
-						<div class="button-section">
-							<button class="sign-in-button">Sign in</button>
+					<button class="sign-in-button">Sign in</button>
 
-							<p>
-								Don't have an account? Create one
-								<button class="sign-up-form__open">here</button>
-							</p>
-							<p class="submission-error">Error</p>
-						</div>
-					</fieldset>
-				</div>
+					<p>
+						Don't have an account? Create one
+						<button class="sign-up-form__open">here</button>
+					</p>
+					<p class="submission-error">Error</p>
+				</form>
 			</div>
 
 			<!------------------------------------------------ SIGN UP  --------------------------------------------------------->
@@ -181,6 +176,6 @@
 				</div>
 			</div>
 		</main>
-		<script src="./dist/bundle.js"></script>
+		<script src="./dist/bundle.js" type="module"></script>
 	</body>
 </html>
