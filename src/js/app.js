@@ -1,6 +1,6 @@
 import firebaseConfig from "./firebaseConfig.js";
 import {initializeApp} from "firebase/app";
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword, signOut} from "firebase/auth";
 
 // INITIALIZE FIREBASE
 initializeApp(firebaseConfig);
@@ -20,6 +20,7 @@ const movieInfoContainer = document.querySelector(".movie-info-container");
 const backButton = document.querySelector(".back-to-main-button");
 
 // SELECTING THE SIGN IN ELEMENTS
+const signInButtonOpenForm = document.querySelector(".sign-in-button__open");
 const emailInput = document.querySelector(".email");
 const passwordInput = document.querySelector(".password");
 const signInButton = document.querySelector(".sign-in-button");
@@ -42,6 +43,9 @@ const closeSignUpFormButton = document.querySelector(".sign-up-form__close");
 const openSignUpFormButton = document.querySelector(".sign-up-form__open");
 const signUpFormContainer = document.querySelector(".sign-up-form-container");
 const signUpButton = document.querySelector(".sign-up-button");
+
+// SELECTING SIGN OUT BUTTON
+const signOutButton = document.querySelector(".sign-out-button");
 
 // OPEN SIGN IN MODAL
 openSignInFormButton.addEventListener("click", (e) => {
@@ -265,9 +269,11 @@ function signUpUser() {
 				signUpForm.reset();
 				signUpFormContainer.style.display = "hidden";
 				mainContainer.style.display = "flex";
+				signInButtonOpenForm.style.display = "none";
+				signOutButton.style.display = "block";
 			})
 			.catch((error) => {
-				console.log(error);
+				console.log("error");
 			});
 	}
 }
@@ -276,6 +282,22 @@ function signUpUser() {
 signUpButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	signUpUser();
+});
+
+// HANDLE SIGN OUT ACTION
+function signOutUser() {
+	signOut(authenticationService)
+		.then(() => {
+			signOutButton.style.display = "none";
+			signInButtonOpenForm.style.display = "block";
+		})
+		.catch((error) => console.log("error"));
+}
+
+// ADD EVENT LISTENER TO SIGN OUT BUTTON
+signOutButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	signOutUser();
 });
 
 export {genreMappings, allMovies};

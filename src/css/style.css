@@ -39,6 +39,18 @@ body {
 	color: #f1bfe6;
 }
 
+.sign-out-button {
+	color: #249b78;
+	font-weight: 800;
+	font-size: 1.2rem;
+	margin: 0 2rem;
+	display: none;
+}
+
+.sign-out-button:hover {
+	color: white;
+}
+
 .back-to-main-button {
 	width: 5rem;
 	height: 2rem;
