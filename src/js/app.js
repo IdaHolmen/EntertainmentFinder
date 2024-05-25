@@ -1,6 +1,11 @@
 import firebaseConfig from "./firebaseConfig.js";
 import {initializeApp} from "firebase/app";
-import {getAuth, createUserWithEmailAndPassword, signOut} from "firebase/auth";
+import {
+	getAuth,
+	createUserWithEmailAndPassword,
+	signOut,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
 
 // INITIALIZE FIREBASE
 initializeApp(firebaseConfig);
@@ -298,6 +303,40 @@ function signOutUser() {
 signOutButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	signOutUser();
+});
+
+// HANDLE SIGN IN ACTION
+function signInUser() {
+	const {signInFormStatus} = validateSignInForm(
+		emailInput.value,
+		passwordInput.value,
+		emailError,
+		passwordError
+	);
+	if (signInFormStatus()) {
+		return;
+	} else {
+		const email = emailInput.value.trim();
+		const password = passwordInput.value.trim();
+		signInWithEmailAndPassword(authenticationService, email, password)
+			.then(() => {
+				signInForm.reset();
+				signInFormContainer.style.display = "none";
+				mainContainer.style.display = "flex";
+				signOutButton.style.display = "block";
+				signInButtonOpenForm.style.display = "none";
+			})
+			.catch((error) => {
+				submissionError.textContent = "Email or password is wrong ⚠️";
+				submissionError.style.visibility = "visible";
+			});
+	}
+}
+
+// ADD EVENT LISTENER TO SIGN IN BUTTON
+signInButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	signInUser();
 });
 
 export {genreMappings, allMovies};
