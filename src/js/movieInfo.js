@@ -2,7 +2,7 @@
 let currentSlide = 0;
 let slides = [];
 let dots = [];
-let movieId = '';
+let movieId = "";
 
 const setMovieId = (id) => {
 	movieId = id;
@@ -10,7 +10,7 @@ const setMovieId = (id) => {
 
 const fetchAndRenderInfo = async () => {
 	try {
-		const response = await fetch('http://localhost:3000/');
+		const response = await fetch("http://localhost:3000/movies");
 		const movies = await response.json();
 		renderMovieInfo(movies);
 	} catch (error) {
@@ -18,15 +18,15 @@ const fetchAndRenderInfo = async () => {
 	}
 };
 
-document.addEventListener('DOMContentLoaded', fetchAndRenderInfo);
+document.addEventListener("DOMContentLoaded", fetchAndRenderInfo);
 
 const fetchAndRenderImages = async (movieId) => {
 	if (!movieId) {
-		console.error('Invalid movieId:', movieId);
+		console.error("Invalid movieId:", movieId);
 		return;
 	}
 	try {
-		const response = await fetch(`http://localhost:3500/images/${movieId}`);
+		const response = await fetch(`http://localhost:3000/images/${movieId}`);
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
@@ -39,10 +39,10 @@ const fetchAndRenderImages = async (movieId) => {
 
 // RENDERING THE IMAGES
 function renderImages(backdrops) {
-	const slideshowContainer = document.querySelector('.slideshow-container');
-	const dotsContainer = document.querySelector('.dots-container');
+	const slideshowContainer = document.querySelector(".slideshow-container");
+	const dotsContainer = document.querySelector(".dots-container");
 
-	dotsContainer.classList.add('dots-container');
+	dotsContainer.classList.add("dots-container");
 
 	// CLEAR EXISTING IMAGES AND DOTS
 	while (slideshowContainer.firstChild) {
@@ -53,34 +53,34 @@ function renderImages(backdrops) {
 	}
 
 	if (!Array.isArray(backdrops)) {
-		console.error('Invalid backdrops:', backdrops);
+		console.error("Invalid backdrops:", backdrops);
 		return;
 	}
 
 	// I WANT TO LIMIT THE NUMBER OF IMAGES TO 6
 	backdrops.slice(0, 6).forEach((backdrop, index) => {
-		const img = document.createElement('img');
+		const img = document.createElement("img");
 		img.src = `https://image.tmdb.org/t/p/original${backdrop.file_path}`;
-		img.alt = 'Movie Image';
-		img.style.width = '100%';
-		img.style.height = 'auto';
-		img.classList.add('slide');
-		img.style.display = index === 0 ? 'block' : 'none';
+		img.alt = "Movie Image";
+		img.style.width = "100%";
+		img.style.height = "auto";
+		img.classList.add("slide");
+		img.style.display = index === 0 ? "block" : "none";
 
 		slideshowContainer.appendChild(img);
 
-		const dot = document.createElement('span');
-		dot.classList.add('dot');
-		if (index === 0) dot.classList.add('active');
-		dot.addEventListener('click', () => {
+		const dot = document.createElement("span");
+		dot.classList.add("dot");
+		if (index === 0) dot.classList.add("active");
+		dot.addEventListener("click", () => {
 			showSlide(index);
 		});
 		dotsContainer.appendChild(dot);
 	});
 
 	// UPDATING GLOBAL VARIABLES
-	slides = document.querySelectorAll('.slide');
-	dots = document.querySelectorAll('.dot');
+	slides = document.querySelectorAll(".slide");
+	dots = document.querySelectorAll(".dot");
 
 	// RESETTING SLIDE INDEX
 	currentSlide = 0;
@@ -91,8 +91,8 @@ function renderImages(backdrops) {
 // SLIDESHOW LOGIC
 const showSlide = (index) => {
 	slides.forEach((slide, i) => {
-		slide.style.display = i === index ? 'block' : 'none';
-		dots[i].classList.toggle('active', i === index);
+		slide.style.display = i === index ? "block" : "none";
+		dots[i].classList.toggle("active", i === index);
 	});
 	currentSlide = index;
 };
@@ -107,21 +107,21 @@ const previousSlide = () => {
 	showSlide(currentSlide);
 };
 
-document.querySelector('.previous').addEventListener('click', previousSlide);
-document.querySelector('.next').addEventListener('click', nextSlide);
+document.querySelector(".previous").addEventListener("click", previousSlide);
+document.querySelector(".next").addEventListener("click", nextSlide);
 
 showSlide(currentSlide);
 
 function renderMovieInfo(movies) {
 	if (!Array.isArray(movies) || movies.length === 0) {
-		console.error('Invalid movies array:', movies);
+		console.error("Invalid movies array:", movies);
 		return;
 	}
 
 	movies.forEach((movie) => {
-		const title = document.querySelector('.info-title');
-		const voteAverage = document.querySelector('.vote-average');
-		const overview = document.querySelector('.overview');
+		const title = document.querySelector(".info-title");
+		const voteAverage = document.querySelector(".vote-average");
+		const overview = document.querySelector(".overview");
 
 		// SET CONTENT
 		title.textContent = movie.title;

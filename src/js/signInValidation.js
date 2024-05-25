@@ -54,7 +54,7 @@ const validateSignInForm = (
 	const signInFormStatus = () => {
 		return errors.errorStatus;
 	};
-	return signInFormStatus;
+	return {signInFormStatus};
 };
 
 export {validateSignInForm};

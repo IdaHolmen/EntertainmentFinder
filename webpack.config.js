@@ -1,6 +1,12 @@
-const path = require("path");
+import path from "path";
+import {fileURLToPath} from "url";
+import Dotenv from "dotenv-webpack";
 
-module.exports = {
+// Resolve __dirname and __filename for ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
 	mode: "development",
 	entry: "./src/js/app.js",
 	output: {
@@ -10,7 +16,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(js)$/,
+				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
 					loader: "babel-loader",
@@ -22,4 +28,16 @@ module.exports = {
 		],
 	},
 	watch: true,
+	plugins: [
+		new Dotenv({
+			path: "./.env",
+		}),
+	],
+	resolve: {
+		fallback: {
+			path: false,
+			os: false,
+			crypto: false,
+		},
+	},
 };

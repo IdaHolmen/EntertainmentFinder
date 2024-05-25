@@ -1,3 +1,13 @@
+import firebaseConfig from "./firebaseConfig.js";
+import {initializeApp} from "firebase/app";
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+
+// INITIALIZE FIREBASE
+initializeApp(firebaseConfig);
+
+// INITIALIZE AUTHENTICATION SERVICE
+const authenticationService = getAuth();
+
 import "./filterGenres.js";
 import {renderImages, renderMovieInfo} from "./movieInfo.js";
 import {validateSignInForm} from "./signInValidation.js";
@@ -37,6 +47,7 @@ const signUpButton = document.querySelector(".sign-up-button");
 openSignInFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	mainContainer.style.display = "none";
+	signUpFormContainer.style.display = "none";
 	signInFormContainer.style.display = "flex";
 });
 
@@ -138,10 +149,10 @@ genres.forEach((genre) => {
 
 const fetchAndRender = async () => {
 	try {
-		const response = await fetch("http://localhost:3000/");
+		const response = await fetch("http://localhost:3000/movies");
 		const movies = await response.json();
-		renderMovies(movies);
 		allMovies = [...movies];
+		renderMovies(movies);
 	} catch (error) {
 		console.log(error);
 	}
@@ -197,8 +208,7 @@ function renderMovies(movies) {
 					(() => {
 						const selectedMovie = movie;
 						return () => {
-							mainContainer.hidden = true;
-							movieInfoContainer.hidden = false;
+							mainContainer.style.display = "none";
 							movieInfoContainer.style.display = "flex";
 							backButton.style.display = "flex";
 							renderMovieInfo([selectedMovie]);
@@ -212,8 +222,7 @@ function renderMovies(movies) {
 
 // ADD EVENT LISTENER TO BACK BUTTON
 backButton.addEventListener("click", () => {
-	mainContainer.hidden = false;
-	movieInfoContainer.hidden = true;
+	mainContainer.style.display = "flex";
 	movieInfoContainer.style.display = "none";
 	backButton.style.display = "none";
 });
@@ -229,16 +238,44 @@ signInForm.addEventListener("submit", (e) => {
 	);
 });
 
-// ADD EVENT LISTENER TO SIGN UP FORM
-signUpButton.addEventListener("click", (e) => {
-	e.preventDefault();
-	validateSignUpForm(
-		signUpFirstName.value,
-		signUpLastName.value,
-		signUpEmail.value,
-		signUpPassword.value,
+// HANDLE SIGN UP ACTION
+function signUpUser() {
+	const {signUpErrorStatus} = validateSignUpForm(
+		signUpFirstName.value.trim(),
+		signUpLastName.value.trim(),
+		signUpEmail.value.trim(),
+		signUpPassword.value.trim(),
 		signUpError
 	);
+	if (signUpErrorStatus()) {
+		return;
+	} else {
+		const newUser = {
+			firstname: signUpFirstName.value.trim(),
+			lastname: signUpLastName.value.trim(),
+			signUpEmail: signUpEmail.value.trim(),
+			signUpPassword: signUpPassword.value.trim(),
+		};
+		createUserWithEmailAndPassword(
+			authenticationService,
+			newUser.signUpEmail,
+			newUser.signUpPassword
+		)
+			.then(() => {
+				signUpForm.reset();
+				signUpFormContainer.style.display = "hidden";
+				mainContainer.style.display = "flex";
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+}
+
+// ADD EVENT LISTENER TO SIGN UP BUTTON
+signUpButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	signUpUser();
 });
 
 export {genreMappings, allMovies};

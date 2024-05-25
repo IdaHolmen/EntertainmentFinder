@@ -21,6 +21,6 @@ const validateSignUpForm = (
 		return errorStatus;
 	};
 
-	return signUpErrorStatus;
+	return {signUpErrorStatus};
 };
 export {validateSignUpForm};

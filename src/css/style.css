@@ -179,7 +179,7 @@ body {
 
 /* SECTION FOR ALL THE CONTENT */
 .main-container {
-	display: none;
+	display: flex;
 	flex-direction: column;
 }
 
@@ -476,7 +476,7 @@ body {
 
 .sign-in-form-container {
 	height: 90vh;
-	display: flex;
+	display: none;
 	flex-direction: column;
 }
 
