@@ -25,14 +25,14 @@ body {
 }
 
 .sign-in-button__open {
-	color: #acacac;
+	color: white;
 	font-weight: 800;
 	font-size: 1.2rem;
 	margin: 0 2rem;
 }
 
 .sign-in-button__open:hover {
-	color: white;
+	color: #acacac;
 }
 
 .sign-in-button__open:active {
@@ -40,7 +40,7 @@ body {
 }
 
 .sign-out-button {
-	color: #249b78;
+	color: white;
 	font-weight: 800;
 	font-size: 1.2rem;
 	margin: 0 2rem;
@@ -48,7 +48,7 @@ body {
 }
 
 .sign-out-button:hover {
-	color: white;
+	color: #acacac;
 }
 
 .back-to-main-button {
@@ -267,6 +267,8 @@ body {
 	margin: 2rem;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	background-color: #181818;
 	color: white;
 }

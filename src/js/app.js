@@ -212,18 +212,13 @@ function renderMovies(movies) {
 				genreContentContainer.append(movieContainer);
 
 				// ADD EVENT LISTENER TO MOVIE CONTAINER
-				movieContainer.addEventListener(
-					"click",
-					(() => {
-						const selectedMovie = movie;
-						return () => {
-							mainContainer.style.display = "none";
-							movieInfoContainer.style.display = "flex";
-							backButton.style.display = "flex";
-							renderMovieInfo([selectedMovie]);
-						};
-					})()
-				);
+				movieContainer.addEventListener("click", () => {
+					const selectedMovie = movie;
+					mainContainer.style.display = "none";
+					movieInfoContainer.style.display = "flex";
+					backButton.style.display = "flex";
+					renderMovieInfo([selectedMovie]);
+				});
 			}
 		});
 	});
@@ -272,7 +267,7 @@ function signUpUser() {
 		)
 			.then(() => {
 				signUpForm.reset();
-				signUpFormContainer.style.display = "hidden";
+				signUpFormContainer.style.display = "none";
 				mainContainer.style.display = "flex";
 				signInButtonOpenForm.style.display = "none";
 				signOutButton.style.display = "block";

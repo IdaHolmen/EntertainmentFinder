@@ -17,8 +17,7 @@ const fetchAndRenderInfo = async () => {
 		console.log(error);
 	}
 };
-
-document.addEventListener("DOMContentLoaded", fetchAndRenderInfo);
+fetchAndRenderInfo();
 
 const fetchAndRenderImages = async (movieId) => {
 	if (!movieId) {
