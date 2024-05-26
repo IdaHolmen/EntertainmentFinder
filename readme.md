@@ -18,5 +18,8 @@ https://www.netflix.com/
 I used this link to add a favicon in the browser tab to make it look more professional:
 https://www.w3schools.com/html/html_favicon.asp
 
+To figure out how to use keypress:
+https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
+
 To style scrollbar so it doesn't look so out of place:
 https://blog.logrocket.com/guide-styling-css-scrollbars/

@@ -274,14 +274,16 @@ function signUpUser() {
 		)
 			.then(() => {
 				signUpForm.reset();
+				header.style.display = "flex";
 				signUpFormContainer.style.display = "none";
 				mainContainer.style.display = "flex";
 				signInButtonOpenForm.style.display = "none";
 				signOutButton.style.display = "block";
-				head;
 			})
 			.catch((error) => {
-				console.log("error");
+				console.error("Error during sign up:", error.message);
+				signUpError.textContent = "Error during sign up: " + error.message;
+				signUpError.style.visibility = "visible";
 			});
 	}
 }
@@ -290,6 +292,14 @@ function signUpUser() {
 signUpButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	signUpUser();
+});
+
+// ADDING EVENT LISTENER SO YOU CAN SUBMIT WITH ENTER
+document.addEventListener("keydown", (event) => {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		signUpUser();
+	}
 });
 
 // HANDLE SIGN OUT ACTION
@@ -324,6 +334,7 @@ function signInUser() {
 		signInWithEmailAndPassword(authenticationService, email, password)
 			.then(() => {
 				signInForm.reset();
+				header.style.display = "flex";
 				signInFormContainer.style.display = "none";
 				mainContainer.style.display = "flex";
 				signOutButton.style.display = "block";
@@ -340,6 +351,14 @@ function signInUser() {
 signInButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	signInUser();
+});
+
+// ADDING EVENT LISTENER SO YOU CAN LOG IN WITH ENTER
+document.addEventListener("keydown", (event) => {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		signInUser();
+	}
 });
 
 export {genreMappings, allMovies};

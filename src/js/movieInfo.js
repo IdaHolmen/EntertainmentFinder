@@ -109,6 +109,14 @@ const previousSlide = () => {
 document.querySelector(".previous").addEventListener("click", previousSlide);
 document.querySelector(".next").addEventListener("click", nextSlide);
 
+document.addEventListener("keydown", (event) => {
+	if (event.key === "ArrowLeft") {
+		previousSlide();
+	} else if (event.key === "ArrowRight") {
+		nextSlide();
+	}
+});
+
 showSlide(currentSlide);
 
 function renderMovieInfo(movies) {
