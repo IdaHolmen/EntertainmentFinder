@@ -19,6 +19,7 @@ import {validateSignInForm} from "./signInValidation.js";
 import {validateSignUpForm} from "./signUpValidation.js";
 
 // SELECTING THE MAIN PAGE ELEMENTS
+const header = document.querySelector(".header");
 const mainContainer = document.querySelector(".main-container");
 const movieSection = document.querySelector(".movie-section");
 const movieInfoContainer = document.querySelector(".movie-info-container");
@@ -55,7 +56,10 @@ const signOutButton = document.querySelector(".sign-out-button");
 // OPEN SIGN IN MODAL
 openSignInFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
+	header.style.display = "none";
 	mainContainer.style.display = "none";
+	movieInfoContainer.style.display = "none";
+	backButton.style.display = "none";
 	signUpFormContainer.style.display = "none";
 	signInFormContainer.style.display = "flex";
 });
@@ -63,6 +67,7 @@ openSignInFormButton.addEventListener("click", (e) => {
 // CLOSE SIGN IN MODAL
 closeSignInFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
+	header.style.display = "flex";
 	signInFormContainer.style.display = "none";
 	signUpFormContainer.style.display = "none";
 	mainContainer.style.display = "flex";
@@ -71,6 +76,7 @@ closeSignInFormButton.addEventListener("click", (e) => {
 // OPEN SIGN UP MODAL
 openSignUpFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
+	header.style.display = "none";
 	signUpFormContainer.style.display = "flex";
 	signInFormContainer.style.display = "none";
 });
@@ -78,6 +84,7 @@ openSignUpFormButton.addEventListener("click", (e) => {
 // CLOSE SIGN UP MODAL
 closeSignUpFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
+	header.style.display = "flex";
 	signUpFormContainer.style.display = "none";
 	signInFormContainer.style.display = "none";
 	mainContainer.style.display = "flex";
@@ -271,6 +278,7 @@ function signUpUser() {
 				mainContainer.style.display = "flex";
 				signInButtonOpenForm.style.display = "none";
 				signOutButton.style.display = "block";
+				head;
 			})
 			.catch((error) => {
 				console.log("error");
