@@ -6,6 +6,7 @@ import {
 	createUserWithEmailAndPassword,
 	signOut,
 	signInWithEmailAndPassword,
+	onAuthStateChanged,
 } from "firebase/auth";
 
 // INITIALIZE FIREBASE
@@ -17,10 +18,9 @@ const authenticationService = getAuth();
 // CONNECT TO THE DATABASE
 const database = getFirestore();
 
-// CONNECT TO THE USERS' COLLECTION
+// CONNECT TO THE DATABASE COLLECTION
 const usersCollection = collection(database, "users");
-
-// ADD USERS TO THE COLLECTION
+const commentsCollection = collection(database, "comments");
 
 import "./filterGenres.js";
 import {renderMovieInfo} from "./movieInfo.js";
@@ -70,9 +70,27 @@ const commentInput = document.querySelector(".comment-input");
 const characterCount = document.querySelector(".character-count");
 const commentError = document.querySelector(".comment-error");
 const commentSubmitButton = document.querySelector(".comment-submit-button");
+const displayCommentContainer = document.querySelector(
+	".display-comment-container"
+);
 
 // VALIDATE THE COMMENT INPUT
 validateCommentInput(commentInput, characterCount, commentError);
+
+// AUTH STATE CHANGE LISTENER
+let currentUser = null;
+
+onAuthStateChanged(authenticationService, (user) => {
+	if (user) {
+		currentUser = user;
+		signOutButton.style.display = "block";
+		signInButtonOpenForm.style.display = "none";
+	} else {
+		currentUser = null;
+		signOutButton.style.display = "none";
+		signInButtonOpenForm.style.display = "block";
+	}
+});
 
 // OPEN SIGN IN MODAL
 openSignInFormButton.addEventListener("click", (e) => {
@@ -400,6 +418,81 @@ document.addEventListener("keydown", (event) => {
 		event.preventDefault();
 		signInUser();
 	}
+});
+
+// COMMENT SUBMISSION LOGIC
+commentSubmitButton.addEventListener("click", async (e) => {
+	e.preventDefault();
+	if (!currentUser) {
+		commentError.style.visibility = "visible";
+		commentError.textContent = "You need to be logged in to comment!";
+		commentError.style.color = "red";
+		commentInput.value = "";
+		characterCount.textContent = "Typed characters: 0";
+		setTimeout(() => {
+			commentError.style.visibility = "hidden";
+		}, 3000);
+		return;
+	}
+	const commentText = commentInput.value.trim();
+	if (commentText.length > 0 && commentText.length <= 140) {
+		try {
+			const comment = {
+				text: commentText,
+				email: currentUser.email,
+			};
+			await addDoc(collection(database, "comments"), comment);
+			commentInput.value = "";
+			commentError.style.visibility = "visible";
+			commentError.textContent = "Comment submitted!";
+			commentError.style.color = "green";
+			characterCount.textContent = "Typed characters: 0";
+			setTimeout(() => {
+				commentError.style.visibility = "hidden";
+			}, 3000);
+		} catch (error) {
+			commentError.style.visibility = "visible";
+			commentError.textContent = "Error submitting comment.";
+			commentError.style.color = "red";
+			setTimeout(() => {
+				commentError.style.visibility = "hidden";
+			}, 3000);
+		}
+	} else {
+		commentError.style.visibility = "visible";
+		commentError.textContent =
+			"Comment cannot be empty and must be less than 140 characters.";
+		commentError.style.color = "red";
+		setTimeout(() => {
+			commentError.style.visibility = "hidden";
+		}, 3000);
+	}
+});
+
+// FETCH AND DISPLAY COMMENTS
+onSnapshot(collection(database, "comments"), (snapshot) => {
+	// CLEAR THE CONTAINER FIRST
+	while (displayCommentContainer.firstChild) {
+		displayCommentContainer.removeChild(displayCommentContainer.firstChild);
+	}
+
+	// ADD EACH COMMENT TO THE CONTAINER
+	snapshot.docs.forEach((doc) => {
+		const commentData = doc.data();
+		const commentElement = document.createElement("div");
+		commentElement.classList.add("comment");
+
+		const emailElement = document.createElement("strong");
+		emailElement.textContent = `${commentData.email}: `;
+
+		const textElement = document.createElement("span");
+		textElement.textContent = commentData.text;
+
+		commentElement.append(emailElement);
+		commentElement.append(textElement);
+
+		displayCommentContainer.append(commentElement);
+	});
 });
 
 export {genreMappings, allMovies, fetchAndRender};
