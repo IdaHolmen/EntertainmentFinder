@@ -20,7 +20,6 @@ const database = getFirestore();
 
 // CONNECT TO THE DATABASE COLLECTION
 const usersCollection = collection(database, "users");
-const commentsCollection = collection(database, "comments");
 
 import "./filterGenres.js";
 import {renderMovieInfo} from "./movieInfo.js";
@@ -73,6 +72,9 @@ const commentSubmitButton = document.querySelector(".comment-submit-button");
 const displayCommentContainer = document.querySelector(
 	".display-comment-container"
 );
+const commentCountElement = document.querySelector(".comment-count");
+const displayCommentsButton = document.querySelector(".display-comment-button");
+const vectorImage = document.querySelector(".vector-image");
 
 // VALIDATE THE COMMENT INPUT
 validateCommentInput(commentInput, characterCount, commentError);
@@ -492,7 +494,23 @@ onSnapshot(collection(database, "comments"), (snapshot) => {
 		commentElement.append(textElement);
 
 		displayCommentContainer.append(commentElement);
+
+		// UPDATE THE COMMENT COUNT
+		const commentCount = snapshot.docs.length;
+		commentCountElement.textContent = `(${commentCount})`;
 	});
+});
+
+displayCommentsButton.addEventListener("click", (e) => {
+	e.preventDefault();
+
+	if (vectorImage.classList.contains("vector-image--active")) {
+		vectorImage.classList.remove("vector-image--active");
+		displayCommentContainer.style.display = "none";
+	} else {
+		vectorImage.classList.add("vector-image--active");
+		displayCommentContainer.style.display = "flex";
+	}
 });
 
 export {genreMappings, allMovies, fetchAndRender};
