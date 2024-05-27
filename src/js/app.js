@@ -1,5 +1,6 @@
 import firebaseConfig from "./firebaseConfig.js";
 import {initializeApp} from "firebase/app";
+import {getFirestore, collection, addDoc, onSnapshot} from "firebase/firestore";
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
@@ -13,8 +14,16 @@ initializeApp(firebaseConfig);
 // INITIALIZE AUTHENTICATION SERVICE
 const authenticationService = getAuth();
 
+// CONNECT TO THE DATABASE
+const database = getFirestore();
+
+// CONNECT TO THE USERS' COLLECTION
+const usersCollection = collection(database, "users");
+
+// ADD USERS TO THE COLLECTION
+
 import "./filterGenres.js";
-import {renderImages, renderMovieInfo} from "./movieInfo.js";
+import {renderMovieInfo} from "./movieInfo.js";
 import {validateSignInForm} from "./signInValidation.js";
 import {validateSignUpForm} from "./signUpValidation.js";
 
@@ -267,18 +276,29 @@ function signUpUser() {
 			signUpEmail: signUpEmail.value.trim(),
 			signUpPassword: signUpPassword.value.trim(),
 		};
+		// MAKING A SEPARATE OBJECT TO STORE USERS IN SO WE DON'T STORE THEIR PASSWORD IN THE DATABASE
+		const storedUser = {
+			firstname: signUpFirstName.value.trim(),
+			lastname: signUpLastName.value.trim(),
+			signUpEmail: signUpEmail.value.trim(),
+		};
 		createUserWithEmailAndPassword(
 			authenticationService,
 			newUser.signUpEmail,
 			newUser.signUpPassword
 		)
 			.then(() => {
-				signUpForm.reset();
 				header.style.display = "flex";
 				signUpFormContainer.style.display = "none";
 				mainContainer.style.display = "flex";
 				signInButtonOpenForm.style.display = "none";
 				signOutButton.style.display = "block";
+				addDoc(usersCollection, storedUser)
+					.then(() => {
+						console.log("User has been added to the collection");
+					})
+					.catch((error) => console.log(error.message));
+				signUpForm.reset();
 			})
 			.catch((error) => {
 				console.error("Error during sign up:", error.message);
@@ -287,6 +307,15 @@ function signUpUser() {
 			});
 	}
 }
+
+// FETCHING USERS FROM THE COLLECTION
+onSnapshot(usersCollection, (snapshot) => {
+	const usersArray = [];
+	snapshot.docs.forEach((doc) => {
+		usersArray.push({id: doc.id, ...doc.data()});
+	});
+	console.log(usersArray);
+});
 
 // ADD EVENT LISTENER TO SIGN UP BUTTON
 signUpButton.addEventListener("click", (e) => {
