@@ -71,7 +71,7 @@ const characterCount = document.querySelector(".character-count");
 const commentError = document.querySelector(".comment-error");
 const commentSubmitButton = document.querySelector(".comment-submit-button");
 
-// VALIDATE THE DESCRIPTION
+// VALIDATE THE COMMENT INPUT
 validateCommentInput(commentInput, characterCount, commentError);
 
 // OPEN SIGN IN MODAL

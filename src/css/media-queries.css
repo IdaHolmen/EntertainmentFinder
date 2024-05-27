@@ -48,7 +48,8 @@
 	.rating-section,
 	.overview,
 	.comment-section,
-	.comment-input {
+	.comment-input,
+	.display-comment-section {
 		width: 90%;
 	}
 }
@@ -58,7 +59,8 @@
 	.rating-section,
 	.overview,
 	.comment-section,
-	.comment-input {
+	.comment-input,
+	.display-comment-section {
 		width: 80%;
 	}
 
@@ -72,7 +74,8 @@
 	.rating-section,
 	.overview,
 	.comment-section,
-	.comment-input {
+	.comment-input,
+	.display-comment-section {
 		width: 70%;
 	}
 

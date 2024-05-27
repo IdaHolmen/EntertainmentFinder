@@ -90,9 +90,7 @@ const validateCommentInput = (commentInput, counterLabel, commentError) => {
 	commentInput.addEventListener("input", () => {
 		counterLabel.textContent = `Typed characters: ${commentInput.value.length}`;
 		if (commentInput.value.length >= 140) {
-			counterLabel.style.color = "red";
-			commentError.textContent =
-				"Description must be less than 140 characters ⚠️";
+			commentError.textContent = "Comment must be less than 140 characters ⚠️";
 			commentError.style.visibility = "visible";
 		} else {
 			counterLabel.style.color = "white";
