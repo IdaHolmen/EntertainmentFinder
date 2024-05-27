@@ -1,3 +1,4 @@
+// SIGN IN FORM VALIDATION
 const validateSignInForm = (
 	email,
 	password,
@@ -57,4 +58,53 @@ const validateSignInForm = (
 	return {signInFormStatus};
 };
 
-export {validateSignInForm};
+// SIGN UP VALIDATION FORM
+const validateSignUpForm = (
+	firstname,
+	lastname,
+	email,
+	password,
+	errorMessage
+) => {
+	let errorStatus = false;
+
+	if (!firstname || !lastname || !email || !password) {
+		errorStatus = true;
+		errorMessage.style.visibility = "visible";
+		errorMessage.textContent = "Please fill out all the fields ⚠️";
+	} else {
+		errorStatus = false;
+		errorMessage.style.visibility = "hidden";
+		errorMessage.textContent = "";
+	}
+
+	const signUpErrorStatus = () => {
+		return errorStatus;
+	};
+
+	return {signUpErrorStatus};
+};
+
+// COMMENT SECTION VALIDATION
+const validateCommentInput = (commentInput, counterLabel, commentError) => {
+	commentInput.addEventListener("input", () => {
+		counterLabel.textContent = `Typed characters: ${commentInput.value.length}`;
+		if (commentInput.value.length >= 140) {
+			counterLabel.style.color = "red";
+			commentError.textContent =
+				"Description must be less than 140 characters ⚠️";
+			commentError.style.visibility = "visible";
+		} else {
+			counterLabel.style.color = "white";
+			commentError.style.visibility = "hidden";
+		}
+	});
+
+	commentInput.addEventListener("keydown", (e) => {
+		if (commentInput.value.length >= 140 && e.key !== "Backspace") {
+			e.preventDefault();
+		}
+	});
+};
+
+export {validateSignInForm, validateSignUpForm, validateCommentInput};

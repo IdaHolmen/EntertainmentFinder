@@ -99,17 +99,18 @@
 			<section class="overview"></section>
 
 			<section class="comment-section">
-				<label for="comment-input">Leave a comment about this movie:</label>
+				<label for="comment-input" class="comment-section-headline"
+					>Leave a comment about this movie:</label
+				>
 				<textarea
 					name="comment-input"
 					class="comment-input"
 					cols="30"
 					rows="3"
+					placeholder="Maximum 140 characters"
 				></textarea>
-				<label class="char-count">Typed characters: 0</label>
-				<label for="task-description-input" class="description-error"
-					>Error</label
-				>
+				<label class="character-count">Typed characters: 0</label>
+				<label for="comment-input" class="comment-error">Error</label>
 				<button class="comment-submit-button">Submit</button>
 			</section>
 		</main>

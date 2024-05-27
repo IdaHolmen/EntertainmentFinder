@@ -24,8 +24,11 @@ const usersCollection = collection(database, "users");
 
 import "./filterGenres.js";
 import {renderMovieInfo} from "./movieInfo.js";
-import {validateSignInForm} from "./signInValidation.js";
-import {validateSignUpForm} from "./signUpValidation.js";
+import {
+	validateSignInForm,
+	validateSignUpForm,
+	validateCommentInput,
+} from "./formValidation.js";
 
 // SELECTING THE MAIN PAGE ELEMENTS
 const header = document.querySelector(".header");
@@ -61,6 +64,15 @@ const signUpButton = document.querySelector(".sign-up-button");
 
 // SELECTING SIGN OUT BUTTON
 const signOutButton = document.querySelector(".sign-out-button");
+
+// SELECTING THE ELEMENTS FOR THE COMMENTS
+const commentInput = document.querySelector(".comment-input");
+const characterCount = document.querySelector(".character-count");
+const commentError = document.querySelector(".comment-error");
+const commentSubmitButton = document.querySelector(".comment-submit-button");
+
+// VALIDATE THE DESCRIPTION
+validateCommentInput(commentInput, characterCount, commentError);
 
 // OPEN SIGN IN MODAL
 openSignInFormButton.addEventListener("click", (e) => {
@@ -390,4 +402,4 @@ document.addEventListener("keydown", (event) => {
 	}
 });
 
-export {genreMappings, allMovies};
+export {genreMappings, allMovies, fetchAndRender};

@@ -1,5 +1,5 @@
-import {genreMappings, allMovies} from "./app.js";
-import {renderImages, renderMovieInfo} from "./movieInfo.js";
+import {genreMappings, allMovies, fetchAndRender} from "./app.js";
+import {renderMovieInfo} from "./movieInfo.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 	const mainContainer = document.querySelector(".main-container");
