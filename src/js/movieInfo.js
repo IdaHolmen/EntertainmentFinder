@@ -138,7 +138,12 @@ function renderMovieInfo(movies) {
 		// SET CONTENT
 		title.textContent = movie.title;
 		overview.textContent = movie.overview;
-		voteAverage.textContent = movie.vote_average;
+
+		// CONVERT THE VOTE AVERAGE TO A PERCENTAGE FORMAT
+		//movie.vote_average * 10 MAKES A PERCENTAGE
+		// Math.round() ROUNDS THE NUMBER TO THE NEAREST INTEGER
+		const voteAveragePercentage = Math.round(movie.vote_average * 10);
+		voteAverage.textContent = `${voteAveragePercentage}%`;
 
 		setMovieId(movie.id);
 		fetchAndRenderImages(movie.id);

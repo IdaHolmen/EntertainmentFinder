@@ -23,3 +23,6 @@ https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
 
 To style scrollbar so it doesn't look so out of place:
 https://blog.logrocket.com/guide-styling-css-scrollbars/
+
+Wanted the vote average to be in percentage, so I used this article to learn Math.round():
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
