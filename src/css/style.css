@@ -456,7 +456,7 @@ body {
 
 .display-comment-button {
 	width: 175px;
-	height: 30px;
+	height: 40px;
 	color: white;
 	font-weight: 800;
 	display: flex;
@@ -486,15 +486,24 @@ body {
 	display: none;
 	flex-direction: column;
 	width: 100%;
+	max-height: 200px;
+	overflow-y: auto;
 	height: auto;
 	background-color: #181818;
 	padding: 0 1rem;
+	border-radius: 5px;
 }
 
 .comment {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 1rem;
+	font-size: 0.9rem;
+}
+
+.comment-email-element {
+	font-weight: bold;
+	color: #f1bfe6;
 }
 
 .comment-section {

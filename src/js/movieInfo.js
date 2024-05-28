@@ -13,6 +13,9 @@ const setMovieId = (id) => {
 const fetchAndRenderInfo = async () => {
 	try {
 		const response = await fetch("http://localhost:3000/movies");
+		if (!response.ok) {
+			throw new Error(`Error! status: ${response.status}`);
+		}
 		const movies = await response.json();
 		renderMovieInfo(movies);
 	} catch (error) {

@@ -207,6 +207,9 @@ genres.forEach((genre) => {
 const fetchAndRender = async () => {
 	try {
 		const response = await fetch("http://localhost:3000/movies");
+		if (!response.ok) {
+			throw new Error(`Error! status: ${response.status}`);
+		}
 		const movies = await response.json();
 		allMovies = [...movies];
 		renderMovies(movies);
@@ -340,15 +343,6 @@ function signUpUser() {
 	}
 }
 
-// FETCHING USERS FROM THE COLLECTION
-onSnapshot(usersCollection, (snapshot) => {
-	const usersArray = [];
-	snapshot.docs.forEach((doc) => {
-		usersArray.push({id: doc.id, ...doc.data()});
-	});
-	console.log(usersArray);
-});
-
 // ADD EVENT LISTENER TO SIGN UP BUTTON
 signUpButton.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -370,7 +364,7 @@ function signOutUser() {
 			signOutButton.style.display = "none";
 			signInButtonOpenForm.style.display = "block";
 		})
-		.catch((error) => console.log("error"));
+		.catch((error) => console.log(error));
 }
 
 // ADD EVENT LISTENER TO SIGN OUT BUTTON
@@ -494,11 +488,13 @@ function fetchAndDisplayComments(movieTitle) {
 			const commentElement = document.createElement("div");
 			commentElement.classList.add("comment");
 
-			const emailElement = document.createElement("strong");
+			const emailElement = document.createElement("p");
 			emailElement.textContent = `${commentData.email}: `;
+			emailElement.classList.add("comment-email-element");
 
 			const textElement = document.createElement("p");
 			textElement.textContent = commentData.text;
+			textElement.classList.add("comment-text-element");
 
 			commentElement.append(emailElement, textElement);
 
@@ -527,5 +523,7 @@ displayCommentsButton.addEventListener("click", (e) => {
 		}
 	}
 });
+
+// COMMENTCOMMENT
 
 export {genreMappings, allMovies, fetchAndRender, fetchAndDisplayComments};

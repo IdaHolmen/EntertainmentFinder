@@ -91,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
 							movieInfoContainer.style.display = "flex";
 							backButton.style.display = "flex";
 							renderMovieInfo([selectedMovie]);
-							console.log("Rendering");
 						});
 					});
 				}
