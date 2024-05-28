@@ -75,11 +75,6 @@ const displayCommentContainer = document.querySelector(
 const commentCountElement = document.querySelector(".comment-count");
 const displayCommentsButton = document.querySelector(".display-comment-button");
 
-// SELECTING THE FAVORITE ELEMENTS
-const addToFavoritesButton = document.querySelector(".add-to-favorites-button");
-const heartImage = document.querySelector(".heart-image");
-const heartImageActive = document.querySelector(".heart-image--active");
-
 // VALIDATE THE COMMENT INPUT
 validateCommentInput(commentInput, characterCount, commentError);
 
@@ -138,7 +133,6 @@ closeSignUpFormButton.addEventListener("click", (e) => {
 // SETTING GENRES AND ALL MOVIES SO THEY CAN BE EXPORTED
 let genreMappings = {};
 let allMovies = [];
-let favorites = [];
 
 // MATCHING THE ID NUMBERS UP AGAINST THE GENRE NAMES
 function storeGenreMappings(genreData) {
@@ -225,59 +219,83 @@ const fetchAndRender = async () => {
 fetchAndRender();
 
 function renderMovies(movies) {
+	// TRACK THE GENRES WITH CONTENT
+	const genresWithContent = new Set();
+
+	// TRACK THE MOVIE ID'S THAT HAVE BEEN RENDERED ALREADY
+	const renderedMovieIds = new Set();
+
+	// ADDING MOVIES TO THEIR RESPECTIVE GENRES
 	movies.forEach((movie) => {
-		//MAKING SURE THAT THE MOVIES GET SORTED IN EVERY GENRE THEY HAVE IN THE genre_ids ARRAY
-		movie.genre_ids.forEach((genreId) => {
-			const genreName = genreMappings[genreId];
-			const genreContentContainer = genreContentContainers[genreName];
+		if (!renderedMovieIds.has(movie.id)) {
+			renderedMovieIds.add(movie.id);
+			movie.genre_ids.forEach((genreId) => {
+				const genreName = genreMappings[genreId];
+				const genreContentContainer = genreContentContainers[genreName];
 
-			if (genreContentContainer) {
-				// CREATING CONTENT CONTAINER ELEMENTS
-				const movieContainer = document.createElement("button");
-				const posterSection = document.createElement("div");
-				const titleSection = document.createElement("div");
-				const moviePoster = document.createElement("img");
-				const movieTitle = document.createElement("p");
+				if (genreContentContainer) {
+					genresWithContent.add(genreName);
 
-				// SETTING CONTENT
-				moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-				moviePoster.alt = movie.title + " Poster";
-				movieTitle.textContent = movie.title;
+					// CREATING CONTENT CONTAINER ELEMENTS
+					const movieContainer = document.createElement("button");
+					const posterSection = document.createElement("div");
+					const titleSection = document.createElement("div");
+					const moviePoster = document.createElement("img");
+					const movieTitle = document.createElement("p");
 
-				// SHORTENS TITLE IF IT'S TOO LONG
-				const maxLength = 30;
-				const shortenedTitle =
-					movie.title.length > maxLength
-						? movie.title.substring(0, maxLength) + "..."
-						: movie.title;
-				movieTitle.textContent = shortenedTitle;
+					// SETTING CONTENT
+					moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+					moviePoster.alt = movie.title + " Poster";
+					movieTitle.textContent = movie.title;
 
-				// APPEND ELEMENTS
-				movieContainer.append(posterSection, titleSection);
-				posterSection.append(moviePoster);
-				titleSection.append(movieTitle);
+					// SHORTENS TITLE IF IT'S TOO LONG
+					const maxLength = 30;
+					const shortenedTitle =
+						movie.title.length > maxLength
+							? movie.title.substring(0, maxLength) + "..."
+							: movie.title;
+					movieTitle.textContent = shortenedTitle;
 
-				// ADD CLASSES
-				movieContainer.classList.add("movie-container");
-				posterSection.classList.add("poster-section");
-				titleSection.classList.add("title-section");
-				moviePoster.classList.add("movie-poster");
-				movieTitle.classList.add("movie-title");
+					// APPEND ELEMENTS
+					movieContainer.append(posterSection, titleSection);
+					posterSection.append(moviePoster);
+					titleSection.append(movieTitle);
 
-				// APPEND MOVIE CONTAINER TO THE CORRECT GENRE CONTENT CONTAINER
-				genreContentContainer.append(movieContainer);
+					// ADD CLASSES
+					movieContainer.classList.add("movie-container");
+					posterSection.classList.add("poster-section");
+					titleSection.classList.add("title-section");
+					moviePoster.classList.add("movie-poster");
+					movieTitle.classList.add("movie-title");
 
-				// ADD EVENT LISTENER TO MOVIE CONTAINER
-				movieContainer.addEventListener("click", () => {
-					const selectedMovie = movie;
-					mainContainer.style.display = "none";
-					movieInfoContainer.style.display = "flex";
-					backButton.style.display = "flex";
-					renderMovieInfo([selectedMovie]);
-				});
-			}
-		});
+					// APPEND MOVIE CONTAINER TO THE CORRECT GENRE CONTENT CONTAINER
+					genreContentContainer.append(movieContainer);
+
+					// ADD EVENT LISTENER TO MOVIE CONTAINER
+					movieContainer.addEventListener("click", () => {
+						const selectedMovie = movie;
+						mainContainer.style.display = "none";
+						movieInfoContainer.style.display = "flex";
+						backButton.style.display = "flex";
+						renderMovieInfo([selectedMovie]);
+					});
+				}
+			});
+		}
 	});
+
+	// CHECK FOR EMPTY GENRE CONTAINERS AND MAKE A MESSAGE INSTEAD
+	for (const genre in genreContentContainers) {
+		const genreContentContainer = genreContentContainers[genre];
+		if (!genresWithContent.has(genre)) {
+			const errorParagraph = document.createElement("p");
+			errorParagraph.textContent = "No content to show";
+			genreContentContainer.append(errorParagraph);
+			genreContentContainer.classList.add("no-content");
+		} else {
+			genreContentContainer.classList.remove("no-content");
+		}
+	}
 }
 
 // ADD EVENT LISTENER TO BACK BUTTON
