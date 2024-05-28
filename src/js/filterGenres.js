@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const clearButtonContainer = document.querySelector(
 		".clear-button-container"
 	);
-	const vectorImage = document.querySelector(".vector-image");
+	const arrowImage = document.querySelector(".arrow-image");
 
 	// FUNCTION TO CREATE GENRE BUTTONS
 	function createGenreButtons(genres) {
@@ -102,12 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	dropdownButton.addEventListener("click", (e) => {
 		e.preventDefault();
 
-		if (vectorImage.classList.contains("vector-image--active")) {
-			vectorImage.classList.remove("vector-image--active");
+		if (arrowImage.classList.contains("arrow-image--active")) {
+			arrowImage.classList.remove("arrow-image--active");
 			filterSection.classList.remove("filter-section--active");
 			clearGenreButtons();
 		} else {
-			vectorImage.classList.add("vector-image--active");
+			arrowImage.classList.add("arrow-image--active");
 			filterSection.classList.add("filter-section--active");
 			createGenreButtons(Object.values(genreMappings).sort());
 		}

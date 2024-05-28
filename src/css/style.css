@@ -109,7 +109,7 @@ body {
 	background-color: #414141;
 }
 
-.vector-image {
+.arrow-image {
 	display: flex;
 	width: 1rem;
 	height: 1rem;
@@ -117,7 +117,7 @@ body {
 	transition: transform 0.3s ease;
 }
 
-.vector-image--active {
+.arrow-image--active {
 	transform: rotate(180deg);
 }
 
@@ -464,6 +464,18 @@ body {
 	justify-content: space-evenly;
 	align-items: center;
 	border-radius: 5px;
+}
+
+.comment-arrow-image {
+	display: flex;
+	width: 1rem;
+	height: 1rem;
+	margin: auto 0;
+	transition: transform 0.3s ease;
+}
+
+.comment-arrow-image--active {
+	transform: rotate(180deg);
 }
 
 .comment-count {

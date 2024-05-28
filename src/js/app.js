@@ -437,11 +437,14 @@ commentSubmitButton.addEventListener("click", async (e) => {
 		return;
 	}
 	const commentText = commentInput.value.trim();
+	const movieTitle = document.querySelector(".info-title").textContent.trim();
+
 	if (commentText.length > 0 && commentText.length <= 140) {
 		try {
 			const comment = {
 				text: commentText,
 				email: currentUser.email,
+				movieTitle: movieTitle,
 			};
 			await addDoc(collection(database, "comments"), comment);
 			commentInput.value = "";
@@ -452,6 +455,7 @@ commentSubmitButton.addEventListener("click", async (e) => {
 			setTimeout(() => {
 				commentError.style.visibility = "hidden";
 			}, 3000);
+			fetchAndDisplayComments(movieTitle);
 		} catch (error) {
 			commentError.style.visibility = "visible";
 			commentError.textContent = "Error submitting comment.";
@@ -472,45 +476,56 @@ commentSubmitButton.addEventListener("click", async (e) => {
 });
 
 // FETCH AND DISPLAY COMMENTS
-onSnapshot(collection(database, "comments"), (snapshot) => {
-	// CLEAR THE CONTAINER FIRST
-	while (displayCommentContainer.firstChild) {
-		displayCommentContainer.removeChild(displayCommentContainer.firstChild);
-	}
+function fetchAndDisplayComments(movieTitle) {
+	onSnapshot(collection(database, "comments"), (snapshot) => {
+		// CLEAR THE CONTAINER FIRST
+		while (displayCommentContainer.firstChild) {
+			displayCommentContainer.removeChild(displayCommentContainer.firstChild);
+		}
 
-	// ADD EACH COMMENT TO THE CONTAINER
-	snapshot.docs.forEach((doc) => {
-		const commentData = doc.data();
-		const commentElement = document.createElement("div");
-		commentElement.classList.add("comment");
+		// FILTER AND ADD EACH COMMENT TO THE CONTAINER
+		const filteredComments = snapshot.docs.filter(
+			(doc) => doc.data().movieTitle === movieTitle
+		);
 
-		const emailElement = document.createElement("strong");
-		emailElement.textContent = `${commentData.email}: `;
+		// ADD EACH COMMENT TO THE CONTAINER
+		filteredComments.forEach((doc) => {
+			const commentData = doc.data();
+			const commentElement = document.createElement("div");
+			commentElement.classList.add("comment");
 
-		const textElement = document.createElement("span");
-		textElement.textContent = commentData.text;
+			const emailElement = document.createElement("strong");
+			emailElement.textContent = `${commentData.email}: `;
 
-		commentElement.append(emailElement);
-		commentElement.append(textElement);
+			const textElement = document.createElement("p");
+			textElement.textContent = commentData.text;
 
-		displayCommentContainer.append(commentElement);
+			commentElement.append(emailElement, textElement);
 
+			displayCommentContainer.append(commentElement);
+		});
 		// UPDATE THE COMMENT COUNT
-		const commentCount = snapshot.docs.length;
+		const commentCount = filteredComments.length;
 		commentCountElement.textContent = `(${commentCount})`;
 	});
-});
+}
 
 displayCommentsButton.addEventListener("click", (e) => {
 	e.preventDefault();
 
-	if (vectorImage.classList.contains("vector-image--active")) {
-		vectorImage.classList.remove("vector-image--active");
+	const commentArrowImage = document.querySelector(".comment-arrow-image");
+	if (displayCommentContainer.children.length === 0) {
+		commentArrowImage.classList.remove("comment-arrow-image--active");
 		displayCommentContainer.style.display = "none";
 	} else {
-		vectorImage.classList.add("vector-image--active");
-		displayCommentContainer.style.display = "flex";
+		if (commentArrowImage.classList.contains("comment-arrow-image--active")) {
+			commentArrowImage.classList.remove("comment-arrow-image--active");
+			displayCommentContainer.style.display = "none";
+		} else {
+			commentArrowImage.classList.add("comment-arrow-image--active");
+			displayCommentContainer.style.display = "flex";
+		}
 	}
 });
 
-export {genreMappings, allMovies, fetchAndRender};
+export {genreMappings, allMovies, fetchAndRender, fetchAndDisplayComments};

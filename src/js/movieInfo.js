@@ -1,3 +1,5 @@
+import {fetchAndDisplayComments} from "./app.js";
+
 // GLOBAL VARIABLES FOR SLIDESHOW
 let currentSlide = 0;
 let slides = [];
@@ -137,6 +139,7 @@ function renderMovieInfo(movies) {
 
 		setMovieId(movie.id);
 		fetchAndRenderImages(movie.id);
+		fetchAndDisplayComments(movie.title);
 	});
 }
 
