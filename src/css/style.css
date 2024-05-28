@@ -387,7 +387,7 @@ body {
 }
 
 .rating-section {
-	flex-basis: 6%;
+	flex-basis: 10%;
 	width: 100%;
 	background-color: #181818;
 	display: flex;
@@ -396,7 +396,7 @@ body {
 }
 
 .vote-average-container {
-	width: 50%;
+	width: 100%;
 	margin-left: 2rem;
 	display: flex;
 	flex-direction: row;
@@ -416,25 +416,8 @@ body {
 	font-size: 1.5rem;
 }
 
-.rating-thumbs-container {
-	width: 50%;
-	margin-right: 2rem;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-.thumbs-up,
-.thumbs-down {
-	width: 2rem;
-	height: 2rem;
-	margin: 0 0.5rem;
-	cursor: pointer;
-}
-
 .overview {
-	flex-basis: 37%;
+	flex-basis: 33%;
 	width: 100%;
 	background-color: #181818;
 	padding: 0.5rem 2rem;
@@ -458,7 +441,7 @@ body {
 	width: 175px;
 	height: 40px;
 	color: white;
-	font-weight: 800;
+	font-weight: 600;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;

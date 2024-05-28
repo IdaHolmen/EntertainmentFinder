@@ -74,7 +74,11 @@ const displayCommentContainer = document.querySelector(
 );
 const commentCountElement = document.querySelector(".comment-count");
 const displayCommentsButton = document.querySelector(".display-comment-button");
-const vectorImage = document.querySelector(".vector-image");
+
+// SELECTING THE FAVORITE ELEMENTS
+const addToFavoritesButton = document.querySelector(".add-to-favorites-button");
+const heartImage = document.querySelector(".heart-image");
+const heartImageActive = document.querySelector(".heart-image--active");
 
 // VALIDATE THE COMMENT INPUT
 validateCommentInput(commentInput, characterCount, commentError);
@@ -134,6 +138,7 @@ closeSignUpFormButton.addEventListener("click", (e) => {
 // SETTING GENRES AND ALL MOVIES SO THEY CAN BE EXPORTED
 let genreMappings = {};
 let allMovies = [];
+let favorites = [];
 
 // MATCHING THE ID NUMBERS UP AGAINST THE GENRE NAMES
 function storeGenreMappings(genreData) {
@@ -523,7 +528,5 @@ displayCommentsButton.addEventListener("click", (e) => {
 		}
 	}
 });
-
-// COMMENTCOMMENT
 
 export {genreMappings, allMovies, fetchAndRender, fetchAndDisplayComments};
