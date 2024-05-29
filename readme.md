@@ -1,6 +1,9 @@
 This app is a library of movies that aims to help the user explore them by browsing through different genres.
+You browse through them by scrolling to the right in each category or swiping right on mobile.
 
-You can sign up or log in to leave comments or rate movies.
+You need to be signed in to add a comment to the movie. The authentication is handled with Firebase Authentication.
+If you try to comment without being signed in you will get a message telling you to sign in first.
+When creating an account the users information is collected and added to the Firebase database, and so are comments.
 
 The transpiling is managed with Babel and I've used Webpack as the bundler.
 
