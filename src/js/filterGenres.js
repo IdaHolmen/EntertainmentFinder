@@ -1,4 +1,4 @@
-import {genreMappings, allMovies, fetchAndRender} from "./app.js";
+import {genreMappings, allMovies} from "./app.js";
 import {renderMovieInfo} from "./movieInfo.js";
 
 document.addEventListener("DOMContentLoaded", () => {

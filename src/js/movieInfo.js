@@ -1,5 +1,14 @@
 import {fetchAndDisplayComments} from "./app.js";
 
+// SELECTING ELEMENTS
+const movieInfoContainer = document.querySelector(".movie-info-container");
+const slideshowSection = document.querySelector(".slideshow-section");
+const slideshowContainer = document.querySelector(".slideshow-container");
+const dotsContainer = document.querySelector(".dots-container");
+const title = document.querySelector(".info-title");
+const voteAverage = document.querySelector(".vote-average");
+const overview = document.querySelector(".overview");
+
 // GLOBAL VARIABLES FOR SLIDESHOW
 let currentSlide = 0;
 let slides = [];
@@ -10,6 +19,13 @@ const setMovieId = (id) => {
 	movieId = id;
 };
 
+// FUNCTION TO REMOVE ALL CHILDREN
+function removeAllChildren(container) {
+	while (container.firstChild) {
+		container.removeChild(container.firstChild);
+	}
+}
+
 const fetchAndRenderInfo = async () => {
 	try {
 		const response = await fetch("http://localhost:3000/movies");
@@ -17,18 +33,48 @@ const fetchAndRenderInfo = async () => {
 			throw new Error(`Error! status: ${response.status}`);
 		}
 		const movies = await response.json();
-		if (movies) {
-			renderMovieInfo(movies);
-		}
+		renderMovieInfo(movies);
 	} catch (error) {
-		console.log(error);
+		if (movieInfoContainer) {
+			removeAllChildren(movieInfoContainer);
+		}
+		const pageErrorContainer = document.createElement("div");
+		const pageError = document.createElement("p");
+		const refreshButton = document.createElement("button");
+
+		pageErrorContainer.classList.add("page-error-container");
+		pageError.classList.add("page-error");
+		refreshButton.classList.add("refresh-button");
+
+		pageError.textContent =
+			"Cannot load information. Please refresh and try again!";
+		refreshButton.textContent = "Refresh";
+
+		movieInfoContainer.append(pageErrorContainer);
+		pageErrorContainer.append(pageError, refreshButton);
+
+		refreshButton.addEventListener("click", () => {
+			window.location.reload();
+		});
 	}
 };
 fetchAndRenderInfo();
 
 const fetchAndRenderImages = async (movieId) => {
 	if (!movieId) {
-		console.error("Invalid movieId:", movieId);
+		if (slideshowSection) {
+			removeAllChildren(slideshowSection);
+		}
+		const pageErrorContainer = document.createElement("div");
+		const pageError = document.createElement("p");
+
+		pageErrorContainer.classList.add("page-error-container");
+		pageError.classList.add("page-error");
+
+		pageError.textContent = "Cannot load image.";
+
+		slideshowSection.append(pageErrorContainer);
+		pageErrorContainer.append(pageError);
 		return;
 	}
 	try {
@@ -39,15 +85,24 @@ const fetchAndRenderImages = async (movieId) => {
 		const images = await response.json();
 		renderImages(images || []);
 	} catch (error) {
-		console.log(error);
+		if (slideshowSection) {
+			removeAllChildren(slideshowSection);
+		}
+		const pageErrorContainer = document.createElement("div");
+		const pageError = document.createElement("p");
+
+		pageErrorContainer.classList.add("page-error-container");
+		pageError.classList.add("page-error");
+
+		pageError.textContent = "Cannot load image";
+
+		slideshowSection.append(pageErrorContainer);
+		pageErrorContainer.append(pageError);
 	}
 };
 
 // RENDERING THE IMAGES
 function renderImages(backdrops) {
-	const slideshowContainer = document.querySelector(".slideshow-container");
-	const dotsContainer = document.querySelector(".dots-container");
-
 	dotsContainer.classList.add("dots-container");
 
 	// CLEAR EXISTING IMAGES AND DOTS
@@ -59,7 +114,6 @@ function renderImages(backdrops) {
 	}
 
 	if (!Array.isArray(backdrops)) {
-		console.error("Invalid backdrops:", backdrops);
 		return;
 	}
 
@@ -128,15 +182,10 @@ showSlide(currentSlide);
 
 function renderMovieInfo(movies) {
 	if (!Array.isArray(movies) || movies.length === 0) {
-		console.error("Invalid movies array:", movies);
 		return;
 	}
 
 	movies.forEach((movie) => {
-		const title = document.querySelector(".info-title");
-		const voteAverage = document.querySelector(".vote-average");
-		const overview = document.querySelector(".overview");
-
 		// SET CONTENT
 		title.textContent = movie.title;
 		overview.textContent = movie.overview;

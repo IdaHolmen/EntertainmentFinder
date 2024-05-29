@@ -75,9 +75,6 @@ const displayCommentContainer = document.querySelector(
 const commentCountElement = document.querySelector(".comment-count");
 const displayCommentsButton = document.querySelector(".display-comment-button");
 
-// VALIDATE THE COMMENT INPUT
-validateCommentInput(commentInput, characterCount, commentError);
-
 // AUTH STATE CHANGE LISTENER
 let currentUser = null;
 
@@ -91,6 +88,26 @@ onAuthStateChanged(authenticationService, (user) => {
 		signOutButton.style.display = "none";
 		signInButtonOpenForm.style.display = "block";
 	}
+});
+
+// ---------------------------------------------------------------
+// EVENT LISTENERS TO OPEN AND CLOSE FORMS
+
+// OPEN SIGN UP MODAL
+openSignUpFormButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	header.style.display = "none";
+	signUpFormContainer.style.display = "flex";
+	signInFormContainer.style.display = "none";
+});
+
+// CLOSE SIGN UP MODAL
+closeSignUpFormButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	header.style.display = "flex";
+	signUpFormContainer.style.display = "none";
+	signInFormContainer.style.display = "none";
+	mainContainer.style.display = "flex";
 });
 
 // OPEN SIGN IN MODAL
@@ -113,23 +130,7 @@ closeSignInFormButton.addEventListener("click", (e) => {
 	mainContainer.style.display = "flex";
 });
 
-// OPEN SIGN UP MODAL
-openSignUpFormButton.addEventListener("click", (e) => {
-	e.preventDefault();
-	header.style.display = "none";
-	signUpFormContainer.style.display = "flex";
-	signInFormContainer.style.display = "none";
-});
-
-// CLOSE SIGN UP MODAL
-closeSignUpFormButton.addEventListener("click", (e) => {
-	e.preventDefault();
-	header.style.display = "flex";
-	signUpFormContainer.style.display = "none";
-	signInFormContainer.style.display = "none";
-	mainContainer.style.display = "flex";
-});
-
+// ------------------------------------------------------------------------------
 // SETTING GENRES AND ALL MOVIES SO THEY CAN BE EXPORTED
 let genreMappings = {};
 let allMovies = [];
@@ -202,7 +203,8 @@ genres.forEach((genre) => {
 	// STORE THE CONTENT CONTAINER IN THE MAPPING
 	genreContentContainers[genre] = contentContainer;
 });
-
+// -----------------------------------------------------------------------
+// FETCHING THE MOVIES
 const fetchAndRender = async () => {
 	try {
 		const response = await fetch("http://localhost:3000/movies");
@@ -213,11 +215,30 @@ const fetchAndRender = async () => {
 		allMovies = [...movies];
 		renderMovies(movies);
 	} catch (error) {
-		console.log(error);
+		mainContainer.removeChild(movieSection);
+
+		const pageErrorContainer = document.createElement("div");
+		const pageError = document.createElement("p");
+		const refreshButton = document.createElement("button");
+
+		pageErrorContainer.classList.add("page-error-container");
+		pageError.classList.add("page-error");
+		refreshButton.classList.add("refresh-button");
+
+		pageError.textContent = "Something went wrong. Please try again.";
+		refreshButton.textContent = "Refresh";
+
+		mainContainer.append(pageErrorContainer);
+		pageErrorContainer.append(pageError, refreshButton);
+
+		refreshButton.addEventListener("click", () => {
+			window.location.reload();
+		});
 	}
 };
 fetchAndRender();
 
+// RENDERING THE MOVIES
 function renderMovies(movies) {
 	// TRACK THE GENRES WITH CONTENT
 	const genresWithContent = new Set();
@@ -305,17 +326,7 @@ backButton.addEventListener("click", () => {
 	backButton.style.display = "none";
 });
 
-// ADD EVENT LISTENER TO SIGN IN FORM
-signInForm.addEventListener("submit", (e) => {
-	e.preventDefault();
-	validateSignInForm(
-		emailInput.value,
-		passwordInput.value,
-		emailError,
-		passwordError
-	);
-});
-
+// -----------------------------------------------------------------------
 // HANDLE SIGN UP ACTION
 function signUpUser() {
 	const {signUpErrorStatus} = validateSignUpForm(
@@ -351,16 +362,19 @@ function signUpUser() {
 				mainContainer.style.display = "flex";
 				signInButtonOpenForm.style.display = "none";
 				signOutButton.style.display = "block";
-				addDoc(usersCollection, storedUser)
-					.then(() => {
-						console.log("User has been added to the collection");
-					})
-					.catch((error) => console.log(error.message));
+				addDoc(usersCollection, storedUser);
 				signUpForm.reset();
 			})
 			.catch((error) => {
-				console.error("Error during sign up:", error.message);
-				signUpError.textContent = "Error during sign up: " + error.message;
+				if (error.code === "auth/weak-password") {
+					signUpError.textContent =
+						"Password is too short. It must be at least 6 characters long.";
+				} else if (error.code === "auth/email-already-in-use") {
+					signUpError.textContent =
+						"This email is already in use. Please use a different email.";
+				} else {
+					signUpError.textContent = "Error during sign up. Please try again!";
+				}
 				signUpError.style.visibility = "visible";
 			});
 	}
@@ -380,6 +394,7 @@ document.addEventListener("keydown", (event) => {
 	}
 });
 
+// -----------------------------------------------------------------------
 // HANDLE SIGN OUT ACTION
 function signOutUser() {
 	signOut(authenticationService)
@@ -387,8 +402,40 @@ function signOutUser() {
 			signOutButton.style.display = "none";
 			signInButtonOpenForm.style.display = "block";
 		})
-		.catch((error) => console.log(error));
+		.catch(() => {
+			mainContainer.removeChild(movieSection);
+
+			const pageErrorContainer = document.createElement("div");
+			const pageError = document.createElement("p");
+			const refreshButton = document.createElement("button");
+
+			pageErrorContainer.classList.add("page-error-container");
+			pageError.classList.add("page-error");
+			refreshButton.classList.add("refresh-button");
+
+			pageError.textContent =
+				"Something went wrong when trying to sign out. Please refresh and try again!";
+			refreshButton.textContent = "Refresh";
+
+			mainContainer.append(pageErrorContainer);
+			pageErrorContainer.append(pageError, refreshButton);
+
+			refreshButton.addEventListener("click", () => {
+				window.location.reload();
+			});
+		});
 }
+
+// ADD EVENT LISTENER TO SIGN IN FORM
+signInForm.addEventListener("submit", (e) => {
+	e.preventDefault();
+	validateSignInForm(
+		emailInput.value,
+		passwordInput.value,
+		emailError,
+		passwordError
+	);
+});
 
 // ADD EVENT LISTENER TO SIGN OUT BUTTON
 signOutButton.addEventListener("click", (e) => {
@@ -396,6 +443,7 @@ signOutButton.addEventListener("click", (e) => {
 	signOutUser();
 });
 
+// -----------------------------------------------------------------------
 // HANDLE SIGN IN ACTION
 function signInUser() {
 	const {signInFormStatus} = validateSignInForm(
@@ -418,7 +466,7 @@ function signInUser() {
 				signOutButton.style.display = "block";
 				signInButtonOpenForm.style.display = "none";
 			})
-			.catch((error) => {
+			.catch(() => {
 				submissionError.textContent = "Email or password is wrong ⚠️";
 				submissionError.style.visibility = "visible";
 			});
@@ -439,7 +487,12 @@ document.addEventListener("keydown", (event) => {
 	}
 });
 
+// -----------------------------------------------------------------------
 // COMMENT SUBMISSION LOGIC
+
+// VALIDATE THE COMMENT INPUT
+validateCommentInput(commentInput, characterCount, commentError);
+
 commentSubmitButton.addEventListener("click", async (e) => {
 	e.preventDefault();
 	if (!currentUser) {
@@ -547,4 +600,4 @@ displayCommentsButton.addEventListener("click", (e) => {
 	}
 });
 
-export {genreMappings, allMovies, fetchAndRender, fetchAndDisplayComments};
+export {genreMappings, allMovies, fetchAndDisplayComments};
