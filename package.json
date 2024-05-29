@@ -6,8 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "webpack --config webpack.config.js",
-		"server": "nodemon server.mjs",
-		"server2": "nodemon server2.mjs"
+		"server": "nodemon server.mjs"
 	},
 	"browserslist": "defaults",
 	"keywords": [],
