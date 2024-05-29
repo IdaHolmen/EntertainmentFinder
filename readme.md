@@ -1,11 +1,18 @@
 This app is a library of movies that aims to help the user explore them by browsing through different genres.
 You browse through them by scrolling to the right in each category or swiping right on mobile.
 
+If you press a movie, a separate module will display the more detailed movie info. It fetches the backdrop images, which are used in a simple slideshow, the rating, and overview text of each film from the API.
+
 You need to be signed in to add a comment to the movie. The authentication is handled with Firebase Authentication.
 If you try to comment without being signed in you will get a message telling you to sign in first.
 When creating an account the users information is collected and added to the Firebase database, and so are comments.
+Both the Sign in form and Sign up form are being validated in a separate module.
+
+API-keys and sensitive information are being hidden in the backend.
 
 The transpiling is managed with Babel and I've used Webpack as the bundler.
+Two commands are needed to start up the project:
+npm start server & npm run build
 
 Logo is created by me and icons are from the Iconify plugin on Figma.
 
