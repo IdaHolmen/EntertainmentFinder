@@ -17,7 +17,9 @@ const fetchAndRenderInfo = async () => {
 			throw new Error(`Error! status: ${response.status}`);
 		}
 		const movies = await response.json();
-		renderMovieInfo(movies);
+		if (movies) {
+			renderMovieInfo(movies);
+		}
 	} catch (error) {
 		console.log(error);
 	}

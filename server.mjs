@@ -28,7 +28,7 @@ const fetchMoviesFromPage = async (page) => {
 app.get("/movies", async (req, res) => {
 	try {
 		let movies = [];
-		const totalPages = 3;
+		const totalPages = 5;
 
 		for (let page = 1; page <= totalPages; page++) {
 			const moviesFromPage = await fetchMoviesFromPage(page);
