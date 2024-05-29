@@ -9,6 +9,9 @@ The transpiling is managed with Babel and I've used Webpack as the bundler.
 
 Logo is created by me and icons are from the Iconify plugin on Figma.
 
+Link to deployed Netlify site:
+https://sweet-starship-9c5d8b.netlify.app/
+
 Link to GitHub repository:
 https://github.com/IdaHolmen/EntertainmentFinder
 
