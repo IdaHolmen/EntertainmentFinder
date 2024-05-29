@@ -39,3 +39,13 @@ https://blog.logrocket.com/guide-styling-css-scrollbars/
 
 Wanted the vote average to be in percentage, so I used this article to learn Math.round():
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
+
+<img width="1458" alt="Screenshot 2024-05-29 at 15 20 06" src="https://github.com/IdaHolmen/EntertainmentFinder/assets/143997448/ebf9597b-bdd0-4625-8fdb-c6501b19b6ad">
+The main page where you can browse through movies.
+
+<img width="1456" alt="Screenshot 2024-05-29 at 15 21 18" src="https://github.com/IdaHolmen/EntertainmentFinder/assets/143997448/38ba22f7-a54d-4d3f-9fbd-84cf53d7b79b">
+The movies can be filtered by genre.
+
+<img width="1455" alt="Screenshot 2024-05-29 at 15 22 09" src="https://github.com/IdaHolmen/EntertainmentFinder/assets/143997448/8c89acca-d8c0-4f1c-a28d-17628f318e8d">
+If you press a movie you can see more information and leave a comment
+
